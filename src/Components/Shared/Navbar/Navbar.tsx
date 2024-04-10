@@ -58,7 +58,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="hidden md:block sticky top-0 bg-white">
+    <div className="hidden md:block sticky top-0 bg-white z-50">
       <nav className="mx-auto py-2 px-8 shadow-md grid grid-cols-5 items-center gap-10 ">
         <div className="col-span-1">
           <img src={brand} className="h-full w-16" alt="" />
