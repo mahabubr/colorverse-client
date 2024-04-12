@@ -21,7 +21,17 @@ const authApi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.auth],
     }),
+    me: builder.query({
+      query: () => ({
+        url: "/auth/me",
+        method: "POST",
+        params: {},
+        body: {},
+      }),
+      providesTags: [tagTypes.auth],
+    }),
   }),
 });
 
-export const { useLoginUserMutation, useRefreshUserMutation } = authApi;
+export const { useLoginUserMutation, useRefreshUserMutation, useMeQuery } =
+  authApi;

@@ -32,6 +32,7 @@ const Login = () => {
             const token = res?.data?.data;
             Cookies.set("token", token, { expires: 30, secure: true });
             navigate("/");
+            window.location.reload();
           } else {
             toast.info(res?.data?.data);
             formik.setFieldError("email", res?.error?.data?.message[0]);

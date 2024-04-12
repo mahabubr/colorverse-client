@@ -38,7 +38,8 @@ const SignUp = () => {
         createUser({ payload }).then((res: any) => {
           if (res?.data?.status === 200) {
             toast.success(res?.data?.message);
-            navigate("/");
+            toast.info("Please login for secure use");
+            navigate("/login");
           } else {
             toast.info(res?.data?.data);
             formik.setFieldError("email", res?.error?.data?.message[0]);

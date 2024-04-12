@@ -7,20 +7,47 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
-const ProfileMenu = () => {
+import Cookies from "js-cookie";
+
+interface IUser {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+const ProfileMenu = ({ userData }: { userData: { data: IUser } }) => {
+  const signOut = () => {
+    Cookies.remove("token");
+    window.location.reload();
+  };
+
+  const cutOutName =
+    userData.data.name.split(" ")[0][0] + userData.data.name.split(" ")[1][0];
+
   return (
     <Menu>
       <MenuHandler>
-        <Avatar
-          variant="circular"
-          alt="tania andrew"
-          className="cursor-pointer"
-          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-          placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
-          size="sm"
-        />
+        {!cutOutName ? (
+          <Avatar
+            variant="circular"
+            alt="tania andrew"
+            className="cursor-pointer"
+            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+            placeholder={undefined}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+            size="sm"
+          />
+        ) : (
+          <div className="rounded-full bg-gradient-to-r font-bold from-orange-700 to-orange-600 p-1 h-8 w-8 text-center cursor-pointer">
+            <p className="text-white">{cutOutName}</p>
+          </div>
+        )}
       </MenuHandler>
       <MenuList
         placeholder={undefined}
@@ -156,6 +183,7 @@ const ProfileMenu = () => {
           placeholder={undefined}
           onPointerEnterCapture={undefined}
           onPointerLeaveCapture={undefined}
+          onClick={() => signOut()}
         >
           <svg
             width="16"
