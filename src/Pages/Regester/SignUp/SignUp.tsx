@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import image from "../../../assets/regester/signup.svg";
 import { toast } from "react-toastify";
@@ -7,10 +8,15 @@ import { useEffect, useState } from "react";
 import generatePassword from "../../../utils/generatePassword";
 import { useFormik } from "formik";
 import signUpValidationSchema from "../../../Validations/Regester/SingUpSchema";
+import { useCreateUserMutation } from "../../../Redux/Features/User/userApi";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [generatePass, setGeneratePass] = useState<string>("");
+
+  const [createUser, { isLoading }] = useCreateUserMutation();
+
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -21,7 +27,27 @@ const SignUp = () => {
     },
     validationSchema: signUpValidationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      try {
+        const payload = {
+          name: `${values.firstName} ${values.lastName}`,
+          email: values.email,
+          password: values.password,
+          role: "creator",
+        };
+
+        createUser({ payload }).then((res: any) => {
+          if (res?.data?.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/");
+          } else {
+            toast.info(res?.data?.data);
+            formik.setFieldError("email", res?.error?.data?.message[0]);
+          }
+        });
+      } catch (error) {
+        toast.error("Something went wrong");
+        window.location.reload();
+      }
     },
   });
 
@@ -83,7 +109,7 @@ const SignUp = () => {
             >
               <div className="flex flex-col pt-4">
                 <div className="flex justify-center items-center gap-3">
-                  <div>
+                  <div className="h-14">
                     <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
                       <input
                         type="text"
@@ -93,12 +119,12 @@ const SignUp = () => {
                       />
                     </div>
                     {formik.touched.firstName && formik.errors.firstName ? (
-                      <small className="text-red-400 text-xs">
+                      <small className="text-red-400 text-xs ">
                         {formik.errors.firstName}
                       </small>
                     ) : null}
                   </div>
-                  <div>
+                  <div className="h-14">
                     <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
                       <input
                         type="text"
@@ -187,8 +213,9 @@ const SignUp = () => {
                 onPointerEnterCapture={undefined}
                 onPointerLeaveCapture={undefined}
                 color="deep-orange"
-                className="mt-10"
+                className="mt-10 flex justify-center"
                 variant="gradient"
+                loading={isLoading}
               >
                 Sign Up
               </Button>
