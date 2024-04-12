@@ -5,6 +5,7 @@ import { Button } from "@material-tailwind/react";
 import ProfileMenu from "./Parts/ProfileMenu";
 import { Link } from "react-router-dom";
 import { useMeQuery } from "../../../Redux/Features/Auth/AuthApi";
+import { PiMagicWand } from "react-icons/pi";
 
 const items = [
   {
@@ -92,7 +93,9 @@ const Navbar = () => {
                   placeholder={undefined}
                   onPointerEnterCapture={undefined}
                   onPointerLeaveCapture={undefined}
+                  className="flex justify-center items-center gap-2"
                 >
+                  <PiMagicWand />
                   Generate
                 </Button>
               </Link>

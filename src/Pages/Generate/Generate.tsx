@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button } from "@material-tailwind/react";
 import { useCallback, useEffect, useState } from "react";
 import {
   BlockPicker,
@@ -10,6 +11,9 @@ import {
   SwatchesPicker,
   TwitterPicker,
 } from "react-color";
+import { RxReset } from "react-icons/rx";
+import { GiAutomaticSas } from "react-icons/gi";
+import generateColorVariations from "../../utils/generateColorVariatons";
 
 interface IColors {
   hex: string;
@@ -36,11 +40,11 @@ const Generate = () => {
   const [light, setLight] = useState<boolean>(false);
   const [dark, setDark] = useState<boolean>(false);
 
-  const [selectPrimary, setSelectPrimary] = useState({});
-  const [selectSecondary, setSelectSecondary] = useState({});
-  const [selectAccent, setSelectAccent] = useState({});
-  const [selectLight, setSelectLight] = useState({});
-  const [selectDark, setSelectDark] = useState({});
+  const [selectPrimary, setSelectPrimary] = useState<any>({});
+  const [selectSecondary, setSelectSecondary] = useState<any>({});
+  const [selectAccent, setSelectAccent] = useState<any>({});
+  const [selectLight, setSelectLight] = useState<any>({});
+  const [selectDark, setSelectDark] = useState<any>({});
 
   const handlePrimary = () => {
     setPrimary(!primary);
@@ -291,13 +295,65 @@ const Generate = () => {
     handleColorPallet();
   }, [handleColorPallet]);
 
-  console.log({
-    selectPrimary,
-    selectSecondary,
-    selectAccent,
-    selectLight,
-    selectDark,
-  });
+  const handleReset = () => {
+    setSelectPrimary({});
+    setSelectSecondary({});
+    setSelectAccent({});
+    setSelectLight({});
+    setSelectDark({});
+  };
+
+  const handleAutoComplete = () => {
+    const auto = generateColorVariations();
+    setSelectPrimary({
+      hex: auto.primary,
+      hsl: {},
+      hsv: {},
+      oldHue: 0,
+      rgb: {},
+      source: undefined,
+    });
+    setSelectSecondary({
+      hex: auto.secondary,
+      hsl: {},
+      hsv: {},
+      oldHue: 0,
+      rgb: {},
+      source: undefined,
+    });
+    setSelectAccent({
+      hex: auto.accent,
+      hsl: {},
+      hsv: {},
+      oldHue: 0,
+      rgb: {},
+      source: undefined,
+    });
+    setSelectLight({
+      hex: auto.light,
+      hsl: {},
+      hsv: {},
+      oldHue: 0,
+      rgb: {},
+      source: undefined,
+    });
+    setSelectDark({
+      hex: auto.dark,
+      hsl: {},
+      hsv: {},
+      oldHue: 0,
+      rgb: {},
+      source: undefined,
+    });
+  };
+
+  const showPrimary = selectPrimary.hex;
+  const showSecondary = selectSecondary.hex;
+  const showAccent = selectAccent.hex;
+  const showLight = selectLight.hex;
+  const showDark = selectDark.hex;
+
+  console.log({ showPrimary, showSecondary, showAccent, showLight, showDark });
 
   return (
     <section className="container mx-auto w-11/12 my-12">
@@ -317,7 +373,13 @@ const Generate = () => {
             Unveil and enrich Color Hunt's diverse selection of colors
           </p>
         </div>
-        <div>3</div>
+        <div>
+          <ChromePicker
+            onChange={(e: any) => handleChrome(e)}
+            color={chrome.rgb}
+            // onChangeComplete={(color) => setChrome(color)}
+          />
+        </div>
         <div>
           <BlockPicker
             onChange={(e: any) => handleBlock(e)}
@@ -326,54 +388,93 @@ const Generate = () => {
           />
         </div>
         <div className="w-full h-full">
-          <div
-            className={`text-xs flex justify-center items-center w-full h-20 bg-gray-400 rounded-t-md border border-gray-600 cursor-pointer duration-500 ${
-              primary ? "animate-pulse scale-110 border-4" : ""
-            } `}
-            onClick={handlePrimary}
-          >
-            Primary
-          </div>
-          <div
-            className={`text-xs flex justify-center items-center w-full h-20 bg-gray-300 border border-gray-600 cursor-pointer duration-500 ${
-              secondary ? "animate-pulse scale-110 border-4" : ""
-            }`}
-            onClick={handleSecondary}
-          >
-            Secondary
-          </div>
-          <div
-            className={`text-xs flex justify-center items-center w-full h-20 bg-gray-200 border border-gray-600 cursor-pointer duration-500 ${
-              accent ? "animate-pulse scale-110 border-4" : ""
-            }`}
-            onClick={handleAccent}
-          >
-            Accent
-          </div>
-          <div
-            className={`text-xs flex justify-center items-center w-full h-20 bg-gray-100 border border-gray-600 cursor-pointer duration-500 ${
-              light ? "animate-pulse scale-110 border-4" : ""
-            }`}
-            onClick={handleLight}
-          >
-            Light
-          </div>
-          <div
-            className={`text-xs flex justify-center items-center w-full h-20 bg-gray-50 rounded-b-md border border-gray-600 cursor-pointer duration-500 ${
-              dark ? "animate-pulse scale-110 border-4" : ""
-            }`}
-            onClick={handleDark}
-          >
-            Dark
+          <div>
+            <div className="flex justify-between items-center gap-4 mb-2">
+              <Button
+                color="deep-orange"
+                size="sm"
+                variant="outlined"
+                placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                className="flex justify-center items-center gap-2 text-[10px]"
+                onClick={handleAutoComplete}
+              >
+                <GiAutomaticSas />
+                Auto Complete
+              </Button>
+              <Button
+                color="black"
+                size="sm"
+                variant="text"
+                placeholder={undefined}
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+                className="flex justify-center items-center gap-1 text-[10px]"
+                onClick={handleReset}
+              >
+                Reset
+                <RxReset />
+              </Button>
+            </div>
+            <div
+              className={`text-xs flex justify-center items-center w-full h-20 bg-gray-400 rounded-t-md  cursor-pointer duration-500 ${
+                primary
+                  ? "scale-110 border-4 border-white rounded-md"
+                  : "border border-gray-400"
+              } `}
+              style={showPrimary ? { backgroundColor: showPrimary } : {}}
+              onClick={handlePrimary}
+            >
+              Primary
+            </div>
+            <div
+              className={`text-xs flex justify-center items-center w-full h-20 bg-gray-300  cursor-pointer duration-500 ${
+                secondary
+                  ? "scale-110 border-4 border-white rounded-md"
+                  : "border border-gray-400"
+              }`}
+              style={showSecondary ? { backgroundColor: showSecondary } : {}}
+              onClick={handleSecondary}
+            >
+              Secondary
+            </div>
+            <div
+              className={`text-xs flex justify-center items-center w-full h-20 bg-gray-200  cursor-pointer duration-500 ${
+                accent
+                  ? "scale-110 border-4 border-white rounded-md"
+                  : "border border-gray-400"
+              }`}
+              style={showAccent ? { backgroundColor: showAccent } : {}}
+              onClick={handleAccent}
+            >
+              Accent
+            </div>
+            <div
+              className={`text-xs flex justify-center items-center w-full h-20 bg-gray-100  cursor-pointer duration-500 ${
+                light
+                  ? "scale-110 border-4 border-white rounded-md"
+                  : "border border-gray-400"
+              }`}
+              style={showLight ? { backgroundColor: showLight } : {}}
+              onClick={handleLight}
+            >
+              Light
+            </div>
+            <div
+              className={`text-xs flex justify-center items-center w-full h-20 bg-gray-50 rounded-b-md  cursor-pointer duration-500 ${
+                dark
+                  ? "scale-110 border-4 border-white rounded-md"
+                  : "border border-gray-400"
+              }`}
+              style={showDark ? { backgroundColor: showDark } : {}}
+              onClick={handleDark}
+            >
+              Dark
+            </div>
           </div>
         </div>
-        <div>
-          <ChromePicker
-            onChange={(e: any) => handleChrome(e)}
-            color={chrome.rgb}
-            // onChangeComplete={(color) => setChrome(color)}
-          />
-        </div>
+        <div>6</div>
         <div>
           <CirclePicker
             onChange={(e: any) => handleCircle(e)}
