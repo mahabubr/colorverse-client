@@ -3,13 +3,32 @@ import { Link } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import image from "../../../assets/regester/signup.svg";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import generatePassword from "../../../utils/generatePassword";
+import { useFormik } from "formik";
+import signUpValidationSchema from "../../../Validations/Regester/SingUpSchema";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [generatePass, setGeneratePass] = useState<string>("");
-  console.log(generatePass);
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: signUpValidationSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
+  useEffect(() => {
+    formik.setFieldValue("password", generatePass);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [generatePass]);
 
   return (
     <section className="container mx-auto w-11/12 my-12 h- flex justify-center items-center">
@@ -58,22 +77,41 @@ const SignUp = () => {
                 Or use email instead
               </div>
             </div>
-            <form className="flex flex-col items-stretch pt-3 md:pt-6">
+            <form
+              onSubmit={formik.handleSubmit}
+              className="flex flex-col items-stretch pt-3 md:pt-6"
+            >
               <div className="flex flex-col pt-4">
                 <div className="flex justify-center items-center gap-3">
-                  <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
-                    <input
-                      type="text"
-                      className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
-                      placeholder="First Name"
-                    />
+                  <div>
+                    <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
+                      <input
+                        type="text"
+                        className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
+                        placeholder="First Name"
+                        {...formik.getFieldProps("firstName")}
+                      />
+                    </div>
+                    {formik.touched.firstName && formik.errors.firstName ? (
+                      <small className="text-red-400 text-xs">
+                        {formik.errors.firstName}
+                      </small>
+                    ) : null}
                   </div>
-                  <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
-                    <input
-                      type="text"
-                      className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
-                      placeholder="Last Name"
-                    />
+                  <div>
+                    <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
+                      <input
+                        type="text"
+                        className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
+                        placeholder="Last Name"
+                        {...formik.getFieldProps("lastName")}
+                      />
+                    </div>
+                    {formik.touched.lastName && formik.errors.lastName ? (
+                      <small className="text-red-400 text-xs">
+                        {formik.errors.lastName}
+                      </small>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -83,8 +121,14 @@ const SignUp = () => {
                     type="email"
                     className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
                     placeholder="Email"
+                    {...formik.getFieldProps("email")}
                   />
                 </div>
+                {formik.touched.email && formik.errors.email ? (
+                  <small className="text-red-400 text-xs mt-2">
+                    {formik.errors.email}
+                  </small>
+                ) : null}
               </div>
               <div className="mb-4 flex flex-col pt-4">
                 <div className="flex justify-between items-center mb-1">
@@ -105,6 +149,7 @@ const SignUp = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     className="w-full flex-shrink appearance-none border-none bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none border-b border-gray-300"
+                    {...formik.getFieldProps("password")}
                     value={generatePass}
                     onChange={(e) =>
                       setGeneratePass((e.target as HTMLInputElement).value)
@@ -112,6 +157,11 @@ const SignUp = () => {
                     placeholder="Password (minimum 8 characters)"
                   />
                 </div>
+                {formik.touched.password && formik.errors.password ? (
+                  <small className="text-red-400 text-xs mt-2">
+                    {formik.errors.password}
+                  </small>
+                ) : null}
               </div>
               <div className="flex items-center">
                 <input

@@ -5,11 +5,15 @@ import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import { ThemeProvider } from "@material-tailwind/react";
+import { Provider } from "react-redux";
+import { store } from "./Redux/store.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 );
