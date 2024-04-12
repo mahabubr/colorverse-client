@@ -1,9 +1,49 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
-import image from '../../../assets/regester/login.svg'
+import image from "../../../assets/regester/login.svg";
+import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import loginValidationSchema from "../../../Validations/Regester/LoginSchema";
+import { useLoginUserMutation } from "../../../Redux/Features/Auth/AuthApi";
+import Cookies from "js-cookie";
 
 const Login = () => {
+  const [loginUser, { isLoading }] = useLoginUserMutation();
+  const navigate = useNavigate();
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginValidationSchema,
+    onSubmit: (values) => {
+      try {
+        const payload = {
+          email: values.email,
+          password: values.password,
+        };
+
+        loginUser({ payload }).then((res: any) => {
+          if (res?.data?.status === 200) {
+            toast.success(res?.data?.message);
+            const token = res?.data?.data;
+            Cookies.set("token", token, { expires: 30, secure: true });
+            navigate("/");
+          } else {
+            toast.info(res?.data?.data);
+            formik.setFieldError("email", res?.error?.data?.message[0]);
+          }
+        });
+      } catch (error) {
+        toast.error("Something went wrong");
+        window.location.reload();
+      }
+    },
+  });
+
   return (
     <section className="container mx-auto w-11/12 my-12 h- flex justify-center items-center">
       <div className="flex w-screen flex-wrap text-slate-800">
@@ -34,9 +74,15 @@ const Login = () => {
             <Button
               variant="outlined"
               className="flex items-center gap-3 mt-8 justify-center"
+              size="sm"
               placeholder={undefined}
               onPointerEnterCapture={undefined}
               onPointerLeaveCapture={undefined}
+              onClick={() =>
+                toast.success(
+                  "O auth not available. please enjoy custom authentication"
+                )
+              }
             >
               Get started with Google
               <FaGoogle />
@@ -46,26 +92,41 @@ const Login = () => {
                 Or use email instead
               </div>
             </div>
-            <form className="flex flex-col items-stretch pt-3 md:pt-6">
+            <form
+              onSubmit={formik.handleSubmit}
+              className="flex flex-col items-stretch pt-3 md:pt-6"
+            >
               <div className="flex flex-col pt-4">
                 <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
                   <input
                     type="email"
                     id="login-email"
-                    className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                    className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
+                    {...formik.getFieldProps("email")}
                     placeholder="Email"
                   />
                 </div>
+                {formik.touched.email && formik.errors.email ? (
+                  <small className="text-red-400 text-xs mt-2">
+                    {formik.errors.email}
+                  </small>
+                ) : null}
               </div>
               <div className="mb-4 flex flex-col pt-4">
                 <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
                   <input
                     type="password"
                     id="login-password"
-                    className="w-full flex-shrink appearance-none border-none bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none border-b border-gray-300"
+                    className="w-full flex-shrink appearance-none border-none bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none border-b border-gray-300"
+                    {...formik.getFieldProps("password")}
                     placeholder="Password (minimum 8 characters)"
                   />
                 </div>
+                {formik.touched.password && formik.errors.password ? (
+                  <small className="text-red-400 text-xs mt-2">
+                    {formik.errors.password}
+                  </small>
+                ) : null}
               </div>
               <div className="flex items-center">
                 <input
@@ -91,8 +152,9 @@ const Login = () => {
                 onPointerEnterCapture={undefined}
                 onPointerLeaveCapture={undefined}
                 color="deep-orange"
-                className="mt-10"
+                className="mt-10 flex justify-center"
                 variant="gradient"
+                loading={isLoading}
               >
                 Login
               </Button>

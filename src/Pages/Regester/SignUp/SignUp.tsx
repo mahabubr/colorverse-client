@@ -86,6 +86,7 @@ const SignUp = () => {
             <Button
               variant="outlined"
               className="flex items-center gap-3 mt-8 justify-center"
+              size="sm"
               placeholder={undefined}
               onPointerEnterCapture={undefined}
               onPointerLeaveCapture={undefined}
