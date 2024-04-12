@@ -12,7 +12,16 @@ const authApi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.auth],
     }),
+    refreshUser: builder.mutation({
+      query: ({ payload }) => ({
+        url: "/auth/refresh-token",
+        method: "POST",
+        params: {},
+        body: payload,
+      }),
+      invalidatesTags: [tagTypes.auth],
+    }),
   }),
 });
 
-export const { useLoginUserMutation } = authApi;
+export const { useLoginUserMutation, useRefreshUserMutation } = authApi;
