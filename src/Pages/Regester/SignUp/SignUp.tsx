@@ -2,8 +2,15 @@ import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import image from "../../../assets/regester/signup.svg";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import generatePassword from "../../../utils/generatePassword";
 
 const SignUp = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [generatePass, setGeneratePass] = useState<string>("");
+  console.log(generatePass);
+
   return (
     <section className="container mx-auto w-11/12 my-12 h- flex justify-center items-center">
       <div className="flex w-screen flex-wrap text-slate-800">
@@ -37,6 +44,11 @@ const SignUp = () => {
               placeholder={undefined}
               onPointerEnterCapture={undefined}
               onPointerLeaveCapture={undefined}
+              onClick={() =>
+                toast.success(
+                  "O auth not available. please enjoy custom authentication"
+                )
+              }
             >
               Get started with Google
               <FaGoogle />
@@ -52,14 +64,14 @@ const SignUp = () => {
                   <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
                     <input
                       type="text"
-                      className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                      className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
                       placeholder="First Name"
                     />
                   </div>
                   <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
                     <input
                       type="text"
-                      className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                      className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
                       placeholder="Last Name"
                     />
                   </div>
@@ -69,19 +81,34 @@ const SignUp = () => {
                 <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
                   <input
                     type="email"
-                    className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                    className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
                     placeholder="Email"
                   />
                 </div>
               </div>
               <div className="mb-4 flex flex-col pt-4">
-                <small className="cursor-pointer text-orange-600 no-underline hover:text-orange-700 text-end mb-2">
-                  <p className=" ">Generate Password?</p>
-                </small>
+                <div className="flex justify-between items-center mb-1">
+                  <small
+                    onClick={() => setGeneratePass(generatePassword())}
+                    className="cursor-pointer text-orange-600 no-underline hover:text-orange-700 text-end"
+                  >
+                    <p className="">Generate Password?</p>
+                  </small>
+                  <small
+                    className=" text-gray-600 focus:outline-none cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    <p>{showPassword ? "Hide" : "Show"} Password</p>
+                  </small>
+                </div>
                 <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-orange-700">
                   <input
-                    type="password"
-                    className="w-full flex-shrink appearance-none border-none bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none border-b border-gray-300"
+                    type={showPassword ? "text" : "password"}
+                    className="w-full flex-shrink appearance-none border-none bg-white py-2 px-4 text-sm text-gray-700 placeholder-gray-400 focus:outline-none border-b border-gray-300"
+                    value={generatePass}
+                    onChange={(e) =>
+                      setGeneratePass((e.target as HTMLInputElement).value)
+                    }
                     placeholder="Password (minimum 8 characters)"
                   />
                 </div>
