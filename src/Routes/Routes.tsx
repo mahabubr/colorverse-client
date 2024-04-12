@@ -3,6 +3,7 @@ import Landing from "../Pages/Landing/Landing";
 import Root from "../Layout/Root";
 import SignUp from "../Pages/Regester/SignUp/SignUp";
 import Login from "../Pages/Regester/Login/Login";
+import Generate from "../Pages/Generate/Generate";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/generate",
+        element: <Generate />,
       },
     ],
   },

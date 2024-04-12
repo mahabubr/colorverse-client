@@ -33,7 +33,7 @@ const App = () => {
       <RouterProvider router={router} />
       <ToastContainer
         position="bottom-center"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -44,6 +44,7 @@ const App = () => {
         theme="light"
         className="text-xs"
         transition={Slide}
+        limit={1}
       />
     </main>
   );

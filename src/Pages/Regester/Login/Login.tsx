@@ -46,7 +46,7 @@ const Login = () => {
   });
 
   return (
-    <section className="container mx-auto w-11/12 my-12 h- flex justify-center items-center">
+    <section className="container mx-auto w-11/12 my-12 flex justify-center items-center">
       <div className="flex w-screen flex-wrap text-slate-800">
         <div className="relative hidden  select-none flex-col justify-center md:flex md:w-1/2">
           <img className="p-16 h-full w-full object-cover" src={image} alt="" />

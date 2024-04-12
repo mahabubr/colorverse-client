@@ -84,7 +84,7 @@ const Navbar = () => {
         <div className="col-span-1 flex gap-3 justify-center">
           {isSuccess ? (
             <>
-              <div>
+              <Link to="/generate">
                 <Button
                   color="deep-orange"
                   size="sm"
@@ -95,7 +95,7 @@ const Navbar = () => {
                 >
                   Generate
                 </Button>
-              </div>
+              </Link>
               <ProfileMenu userData={userData} />
             </>
           ) : (
