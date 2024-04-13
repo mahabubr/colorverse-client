@@ -14,6 +14,8 @@ import Compact from "./Pallet/Compact";
 import Twitter from "./Pallet/Twitter";
 import Sketch from "./Pallet/Sketch";
 import Swatches from "./Pallet/Swatches";
+import colorCodeToName from "./Logic/ColorCodeToName";
+import getColorCategory from "./Logic/getColorCategory";
 
 interface IColors {
   hex: string;
@@ -192,6 +194,46 @@ const Generate = () => {
   const showLight = selectLight.hex;
   const showDark = selectDark.hex;
 
+  let colorTagsList;
+
+  if (showPrimary && showSecondary && showAccent && showLight && showDark) {
+    colorTagsList = colorCodeToName(
+      showPrimary,
+      showSecondary,
+      showAccent,
+      showLight,
+      showDark
+    );
+
+    colorTagsList.push(
+      getColorCategory(
+        selectPrimary.hsl.h,
+        selectPrimary.hsl.s,
+        selectPrimary.hsl.l
+      )
+    );
+    colorTagsList.push(
+      getColorCategory(
+        selectSecondary.hsl.h,
+        selectSecondary.hsl.s,
+        selectSecondary.hsl.l
+      )
+    );
+    colorTagsList.push(
+      getColorCategory(
+        selectAccent.hsl.h,
+        selectAccent.hsl.s,
+        selectAccent.hsl.l
+      )
+    );
+    colorTagsList.push(
+      getColorCategory(selectLight.hsl.h, selectLight.hsl.s, selectLight.hsl.l)
+    );
+    colorTagsList.push(
+      getColorCategory(selectDark.hsl.h, selectDark.hsl.s, selectDark.hsl.l)
+    );
+  }
+
   return (
     <section className="container mx-auto w-11/12 my-12">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-20">
@@ -240,8 +282,8 @@ const Generate = () => {
         <div>
           <Circle handleColor={handleColor} color={color} />
         </div>
-        <div>
-          <ColorTags />
+        <div className="w-full">
+          <ColorTags colorTagsList={colorTagsList as []} />
         </div>
         <div>
           <Compact handleColor={handleColor} color={color} />
