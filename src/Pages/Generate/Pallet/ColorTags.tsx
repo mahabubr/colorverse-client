@@ -15,7 +15,7 @@ const ColorTags = ({
   return (
     <div>
       <small className="text-xs font-bold border-b-2 ">Color Tags</small>
-      <div className="mt-5 space-y-5 h-[20vh] overflow-y-scroll">
+      <div className="mt-5 space-y-5 h-32 overflow-y-scroll">
         <div className="flex flex-wrap gap-2 p-2">
           {colorTagsList && colorTagsList.length > 0 ? (
             colorTagsList.map((cl: string, i) => (

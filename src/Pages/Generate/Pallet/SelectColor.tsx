@@ -29,7 +29,7 @@ const SelectColor = ({
   return (
     <div>
       <small className="text-xs font-bold border-b-2 ">Selected colors</small>
-      <div className="mt-5 space-y-5 h-[50vh] overflow-scroll ">
+      <div className="mt-5 space-y-5 h-60 overflow-scroll ">
         {selectPrimary.hex ? (
           <div>
             <h2 className="text-sm font-thin tracking-widest flex gap-2 items-center">

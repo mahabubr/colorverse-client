@@ -7,3 +7,43 @@
 * {
   font-family: "Poppins", sans-serif;
 }
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ff8a65;
+  padding: 8px 12px;
+  border: 1px solid #ff8a65;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination li a:hover {
+  background-color: #ffcebf;
+}
+
+.pagination li.active a {
+  background-color: #ff8a65;
+  color: #fff;
+}

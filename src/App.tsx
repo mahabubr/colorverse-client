@@ -5,6 +5,7 @@ import { Slide, ToastContainer, toast } from "react-toastify";
 import { useCallback, useEffect } from "react";
 import { useRefreshUserMutation } from "./Redux/Features/Auth/AuthApi";
 import Cookies from "js-cookie";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   // handle refresh token
@@ -22,11 +23,13 @@ const App = () => {
 
   useEffect(() => {
     // do
-    const interval = setInterval(() => {
-      refreshToken();
-    }, 5 * 60 * 1000);
+    if (Cookies.get("token")) {
+      const interval = setInterval(() => {
+        refreshToken();
+      }, 5 * 60 * 1000);
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }
   }, [refreshToken]);
 
   return (
@@ -47,6 +50,7 @@ const App = () => {
         transition={Slide}
         limit={1}
       />
+      <Toaster toastOptions={{ style: { fontSize: "10px" } }} />
     </main>
   );
 };
