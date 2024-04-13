@@ -5,14 +5,14 @@ import FilterSide from "../../Components/Landing/FilterSide/FilterSide";
 const Landing = () => {
   return (
     <section className="container mx-auto w-11/12 my-12">
-      <div className="grid grid-cols-5 gap-10">
-        <div className="col-span-1">
+      <div className="grid  lg:grid-cols-5 gap-10">
+        <div className="lg:col-span-1 hidden lg:block">
           <FilterSide />
         </div>
-        <div className="col-span-3">
+        <div className="lg:col-span-3">
           <Content />
         </div>
-        <div className="col-span-1">
+        <div className="lg:col-span-1 hidden lg:block">
           <ContributeSide />
         </div>
       </div>

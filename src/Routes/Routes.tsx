@@ -4,6 +4,7 @@ import Root from "../Layout/Root";
 import SignUp from "../Pages/Regester/SignUp/SignUp";
 import Login from "../Pages/Regester/Login/Login";
 import Generate from "../Pages/Generate/Generate";
+import SinglePallet from "../Pages/SinglePallet/SinglePallet";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/generate",
         element: <Generate />,
+      },
+      {
+        path: "/pallet/:id",
+        element: <SinglePallet />,
       },
     ],
   },

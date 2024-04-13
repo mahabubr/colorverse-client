@@ -7,6 +7,9 @@ import ReactPaginate from "react-paginate";
 import { useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
 import { GrPrevious } from "react-icons/gr";
+import moment from "moment";
+import { FaEye, FaHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Content = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -26,7 +29,7 @@ const Content = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 place-items-center gap-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 place-items-center gap-4 md:gap-10">
         {palletData && palletData.length && !isLoading ? (
           palletData.map((pallet: any) => (
             <div key={pallet.id} className="w-full">
@@ -85,11 +88,26 @@ const Content = () => {
                   {pallet.dark.hex} <IoCopyOutline />
                 </p>
               </div>
+              <div className="md:flex justify-between items-center mt-2 gap-2">
+                <div className="flex justify-between items-center gap-2">
+                  <p className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md">
+                    <FaHeart className="text-red-500" /> 00
+                  </p>
+                  <Link
+                    to={`/pallet/${pallet.id}`}
+                    className="duration-500 px-2 py-2 rounded-md cursor-pointer border"
+                  >
+                    <FaEye />
+                  </Link>
+                </div>
+                <p className="text-xs font-light">
+                  {moment(pallet.createdAt).startOf("hours").fromNow()}
+                </p>
+              </div>
             </div>
           ))
         ) : (
-          <div className="grid grid-cols-3  gap-10">
-            <Skeleton />
+          <div className="grid grid-cols-2">
             <Skeleton />
             <Skeleton />
             <Skeleton />

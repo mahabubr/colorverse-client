@@ -20,7 +20,19 @@ const palletApi = api.injectEndpoints({
       }),
       providesTags: [tagTypes.pallet],
     }),
+    getSinglePallet: builder.query({
+      query: ({ id }) => ({
+        url: `/pallet/${id}`,
+        method: "GET",
+        params: {},
+      }),
+      providesTags: [tagTypes.pallet],
+    }),
   }),
 });
 
-export const { useCreatePalletMutation, useGetPalletQuery } = palletApi;
+export const {
+  useCreatePalletMutation,
+  useGetPalletQuery,
+  useGetSinglePalletQuery,
+} = palletApi;
