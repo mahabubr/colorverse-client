@@ -3,7 +3,15 @@ import { Button } from "@material-tailwind/react";
 import { FaHashtag } from "react-icons/fa6";
 import { IoMdColorFill } from "react-icons/io";
 
-const ColorTags = ({ colorTagsList }: { colorTagsList: [] }) => {
+const ColorTags = ({
+  colorTagsList,
+  isLoading,
+  handleCreatePallet,
+}: {
+  colorTagsList: string[];
+  isLoading: boolean;
+  handleCreatePallet: any;
+}) => {
   return (
     <div>
       <small className="text-xs font-bold border-b-2 ">Color Tags</small>
@@ -28,6 +36,7 @@ const ColorTags = ({ colorTagsList }: { colorTagsList: [] }) => {
       {colorTagsList && colorTagsList.length > 0 && (
         <div className="flex justify-center">
           <Button
+            onClick={handleCreatePallet}
             type="submit"
             placeholder={undefined}
             onPointerEnterCapture={undefined}
@@ -35,7 +44,7 @@ const ColorTags = ({ colorTagsList }: { colorTagsList: [] }) => {
             color="deep-orange"
             className="mt-5 flex justify-center w-full gap-3"
             variant="gradient"
-            //   loading={true}
+            loading={isLoading}
           >
             <IoMdColorFill />
             Contribute

@@ -16,6 +16,9 @@ import Sketch from "./Pallet/Sketch";
 import Swatches from "./Pallet/Swatches";
 import colorCodeToName from "./Logic/ColorCodeToName";
 import getColorCategory from "./Logic/getColorCategory";
+import { useCreatePalletMutation } from "../../Redux/Features/Pallet/palletApi";
+import { useMeQuery } from "../../Redux/Features/Auth/AuthApi";
+import { toast } from "react-toastify";
 
 interface IColors {
   hex: string;
@@ -27,6 +30,9 @@ interface IColors {
 }
 
 const Generate = () => {
+  const [createPallet, { isLoading }] = useCreatePalletMutation();
+  const { data: userData } = useMeQuery({});
+
   const [color, setColor] = useState<any>({});
 
   const [primary, setPrimary] = useState<boolean>(false);
@@ -113,7 +119,7 @@ const Generate = () => {
         console.log("Reset");
       }
     } else {
-      console.log("Reset");
+      console.warn("Reset");
     }
   }, [accent, color, dark, light, primary, secondary]);
 
@@ -194,7 +200,7 @@ const Generate = () => {
   const showLight = selectLight.hex;
   const showDark = selectDark.hex;
 
-  let colorTagsList;
+  let colorTagsList: string[] = [];
 
   if (showPrimary && showSecondary && showAccent && showLight && showDark) {
     colorTagsList = colorCodeToName(
@@ -233,6 +239,31 @@ const Generate = () => {
       getColorCategory(selectDark.hsl.h, selectDark.hsl.s, selectDark.hsl.l)
     );
   }
+
+  const handleCreatePallet = () => {
+    const payload = {
+      primary: selectPrimary,
+      secondary: selectSecondary,
+      accent: selectAccent,
+      light: selectLight,
+      dark: selectDark,
+      tags: colorTagsList,
+      userId: userData.data.id,
+    };
+
+    createPallet({ payload }).then((res: any) => {
+      if (res.data.status === 200) {
+        toast.success(res.data.message);
+        setSelectPrimary({});
+        setSelectSecondary({});
+        setSelectAccent({});
+        setSelectDark({});
+        setSelectLight({});
+      } else {
+        toast.error("Something went wrong to create");
+      }
+    });
+  };
 
   return (
     <section className="container mx-auto w-11/12 my-12">
@@ -283,7 +314,11 @@ const Generate = () => {
           <Circle handleColor={handleColor} color={color} />
         </div>
         <div className="w-full">
-          <ColorTags colorTagsList={colorTagsList as []} />
+          <ColorTags
+            colorTagsList={colorTagsList as string[]}
+            isLoading={isLoading}
+            handleCreatePallet={handleCreatePallet}
+          />
         </div>
         <div>
           <Compact handleColor={handleColor} color={color} />
