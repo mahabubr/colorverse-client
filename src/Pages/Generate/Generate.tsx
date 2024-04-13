@@ -14,6 +14,8 @@ import {
 import { RxReset } from "react-icons/rx";
 import { GiAutomaticSas } from "react-icons/gi";
 import generateColorVariations from "../../utils/generateColorVariatons";
+import tinycolor from "tinycolor2";
+import { IoCopyOutline } from "react-icons/io5";
 
 interface IColors {
   hex: string;
@@ -25,14 +27,7 @@ interface IColors {
 }
 
 const Generate = () => {
-  const [hue, setHue] = useState<any>({});
-  const [block, setBlock] = useState<any>({});
-  const [chrome, setChrome] = useState<any>({});
-  const [circle, setCircle] = useState<any>({});
-  const [compact, setCompact] = useState<any>({});
-  const [twitter, setTwitter] = useState<any>({});
-  const [sketch, setSketch] = useState<any>({});
-  const [swatches, setSwatches] = useState<any>({});
+  const [color, setColor] = useState<any>({});
 
   const [primary, setPrimary] = useState<boolean>(false);
   const [secondary, setSecondary] = useState<boolean>(false);
@@ -82,214 +77,59 @@ const Generate = () => {
     setDark(!dark);
   };
 
-  const handleHue = (e: IColors) => {
-    setHue(e);
-
-    setBlock({});
-    setChrome({});
-    setCircle({});
-    setCompact({});
-    setTwitter({});
-    setSketch({});
-    setSwatches({});
-  };
-  const handleBlock = (e: IColors) => {
-    setBlock(e);
-
-    setHue({});
-    setChrome({});
-    setCircle({});
-    setCompact({});
-    setTwitter({});
-    setSketch({});
-    setSwatches({});
-  };
-  const handleChrome = (e: IColors) => {
-    setChrome(e);
-
-    setHue({});
-    setBlock({});
-    setCircle({});
-    setCompact({});
-    setTwitter({});
-    setSketch({});
-    setSwatches({});
-  };
-  const handleCircle = (e: IColors) => {
-    setCircle(e);
-
-    setHue({});
-    setBlock({});
-    setChrome({});
-    setCompact({});
-    setTwitter({});
-    setSketch({});
-    setSwatches({});
-  };
-  const handleCompact = (e: IColors) => {
-    setCompact(e);
-
-    setHue({});
-    setBlock({});
-    setChrome({});
-    setCircle({});
-    setTwitter({});
-    setSketch({});
-    setSwatches({});
-  };
-  const handleTwitter = (e: IColors) => {
-    setTwitter(e);
-
-    setHue({});
-    setBlock({});
-    setChrome({});
-    setCircle({});
-    setCompact({});
-    setSketch({});
-    setSwatches({});
-  };
-  const handleSketch = (e: IColors) => {
-    setSketch(e);
-
-    setHue({});
-    setBlock({});
-    setChrome({});
-    setCircle({});
-    setCompact({});
-    setTwitter({});
-    setSwatches({});
-  };
-  const handleSwathes = (e: IColors) => {
-    setSwatches(e);
-
-    setHue({});
-    setBlock({});
-    setChrome({});
-    setCircle({});
-    setCompact({});
-    setTwitter({});
-    setSketch({});
+  const handleColor = (e: IColors) => {
+    setColor(e);
   };
 
   const handleColorPallet = useCallback(() => {
     if (primary) {
-      if (hue.hex && hue.hsl && hue.hsv && hue.rgb) {
-        setSelectPrimary(hue);
-      } else if (block.hex && block.hsl && block.hsv && block.rgb) {
-        setSelectPrimary(block);
-      } else if (chrome.hex && chrome.hsl && chrome.hsv && chrome.rgb) {
-        setSelectPrimary(chrome);
-      } else if (circle.hex && circle.hsl && circle.hsv && circle.rgb) {
-        setSelectPrimary(circle);
-      } else if (compact.hex && compact.hsl && compact.hsv && compact.rgb) {
-        setSelectPrimary(compact);
-      } else if (twitter.hex && twitter.hsl && twitter.hsv && twitter.rgb) {
-        setSelectPrimary(twitter);
-      } else if (sketch.hex && sketch.hsl && sketch.hsv && sketch.rgb) {
-        setSelectPrimary(sketch);
-      } else if (swatches.hex && swatches.hsl && swatches.hsv && swatches.rgb) {
-        setSelectPrimary(swatches);
+      if (color.hex && color.hsl && color.hsv && color.rgb) {
+        setSelectPrimary(color);
       } else {
         console.log("Reset");
       }
     } else if (secondary) {
-      if (hue.hex && hue.hsl && hue.hsv && hue.rgb) {
-        setSelectSecondary(hue);
-      } else if (block.hex && block.hsl && block.hsv && block.rgb) {
-        setSelectSecondary(block);
-      } else if (chrome.hex && chrome.hsl && chrome.hsv && chrome.rgb) {
-        setSelectSecondary(chrome);
-      } else if (circle.hex && circle.hsl && circle.hsv && circle.rgb) {
-        setSelectSecondary(circle);
-      } else if (compact.hex && compact.hsl && compact.hsv && compact.rgb) {
-        setSelectSecondary(compact);
-      } else if (twitter.hex && twitter.hsl && twitter.hsv && twitter.rgb) {
-        setSelectSecondary(twitter);
-      } else if (sketch.hex && sketch.hsl && sketch.hsv && sketch.rgb) {
-        setSelectSecondary(sketch);
-      } else if (swatches.hex && swatches.hsl && swatches.hsv && swatches.rgb) {
-        setSelectSecondary(swatches);
+      if (color.hex && color.hsl && color.hsv && color.rgb) {
+        setSelectSecondary(color);
       } else {
         console.log("Reset");
       }
     } else if (accent) {
-      if (hue.hex && hue.hsl && hue.hsv && hue.rgb) {
-        setSelectAccent(hue);
-      } else if (block.hex && block.hsl && block.hsv && block.rgb) {
-        setSelectAccent(block);
-      } else if (chrome.hex && chrome.hsl && chrome.hsv && chrome.rgb) {
-        setSelectAccent(chrome);
-      } else if (circle.hex && circle.hsl && circle.hsv && circle.rgb) {
-        setSelectAccent(circle);
-      } else if (compact.hex && compact.hsl && compact.hsv && compact.rgb) {
-        setSelectAccent(compact);
-      } else if (twitter.hex && twitter.hsl && twitter.hsv && twitter.rgb) {
-        setSelectAccent(twitter);
-      } else if (sketch.hex && sketch.hsl && sketch.hsv && sketch.rgb) {
-        setSelectAccent(sketch);
-      } else if (swatches.hex && swatches.hsl && swatches.hsv && swatches.rgb) {
-        setSelectAccent(swatches);
+      if (color.hex && color.hsl && color.hsv && color.rgb) {
+        setSelectAccent(color);
       } else {
         console.log("Reset");
       }
     } else if (light) {
-      if (hue.hex && hue.hsl && hue.hsv && hue.rgb) {
-        setSelectLight(hue);
-      } else if (block.hex && block.hsl && block.hsv && block.rgb) {
-        setSelectLight(block);
-      } else if (chrome.hex && chrome.hsl && chrome.hsv && chrome.rgb) {
-        setSelectLight(chrome);
-      } else if (circle.hex && circle.hsl && circle.hsv && circle.rgb) {
-        setSelectLight(circle);
-      } else if (compact.hex && compact.hsl && compact.hsv && compact.rgb) {
-        setSelectLight(compact);
-      } else if (twitter.hex && twitter.hsl && twitter.hsv && twitter.rgb) {
-        setSelectLight(twitter);
-      } else if (sketch.hex && sketch.hsl && sketch.hsv && sketch.rgb) {
-        setSelectLight(sketch);
-      } else if (swatches.hex && swatches.hsl && swatches.hsv && swatches.rgb) {
-        setSelectLight(swatches);
+      if (color.hex && color.hsl && color.hsv && color.rgb) {
+        setSelectLight(color);
       } else {
         console.log("Reset");
       }
     } else if (dark) {
-      if (hue.hex && hue.hsl && hue.hsv && hue.rgb) {
-        setSelectDark(hue);
-      } else if (block.hex && block.hsl && block.hsv && block.rgb) {
-        setSelectDark(block);
-      } else if (chrome.hex && chrome.hsl && chrome.hsv && chrome.rgb) {
-        setSelectDark(chrome);
-      } else if (circle.hex && circle.hsl && circle.hsv && circle.rgb) {
-        setSelectDark(circle);
-      } else if (compact.hex && compact.hsl && compact.hsv && compact.rgb) {
-        setSelectDark(compact);
-      } else if (twitter.hex && twitter.hsl && twitter.hsv && twitter.rgb) {
-        setSelectDark(twitter);
-      } else if (sketch.hex && sketch.hsl && sketch.hsv && sketch.rgb) {
-        setSelectDark(sketch);
-      } else if (swatches.hex && swatches.hsl && swatches.hsv && swatches.rgb) {
-        setSelectDark(swatches);
+      if (color.hex && color.hsl && color.hsv && color.rgb) {
+        setSelectDark(color);
       } else {
         console.log("Reset");
       }
     } else {
       console.log("Reset");
     }
-  }, [
-    accent,
-    block,
-    chrome,
-    circle,
-    compact,
-    dark,
-    hue,
-    light,
-    primary,
-    secondary,
-    sketch,
-    swatches,
-    twitter,
-  ]);
+  }, [accent, color, dark, light, primary, secondary]);
+
+  useEffect(() => {
+    if (!primary) {
+      setColor({});
+    } else if (!secondary) {
+      setColor({});
+    } else if (!accent) {
+      setColor({});
+    } else if (!light) {
+      setColor({});
+    } else if (!dark) {
+      setColor({});
+    }
+  }, [primary, secondary, accent, dark, light]);
 
   useEffect(() => {
     handleColorPallet();
@@ -305,47 +145,50 @@ const Generate = () => {
 
   const handleAutoComplete = () => {
     const auto = generateColorVariations();
+
     setSelectPrimary({
       hex: auto.primary,
-      hsl: {},
-      hsv: {},
+      hsl: tinycolor(auto.primary).toHsl(),
+      hsv: tinycolor(auto.primary).toHsv(),
       oldHue: 0,
-      rgb: {},
-      source: undefined,
+      rgb: tinycolor(auto.primary).toRgb(),
+      source: "hex",
     });
     setSelectSecondary({
       hex: auto.secondary,
-      hsl: {},
-      hsv: {},
+      hsl: tinycolor(auto.secondary).toHsl(),
+      hsv: tinycolor(auto.secondary).toHsv(),
       oldHue: 0,
-      rgb: {},
-      source: undefined,
+      rgb: tinycolor(auto.secondary).toRgb(),
+      source: "hex",
     });
     setSelectAccent({
       hex: auto.accent,
-      hsl: {},
-      hsv: {},
+      hsl: tinycolor(auto.accent).toHsl(),
+      hsv: tinycolor(auto.accent).toHsv(),
       oldHue: 0,
-      rgb: {},
-      source: undefined,
+      rgb: tinycolor(auto.accent).toRgb(),
+      source: "hex",
     });
     setSelectLight({
       hex: auto.light,
-      hsl: {},
-      hsv: {},
+      hsl: tinycolor(auto.light).toHsl(),
+      hsv: tinycolor(auto.light).toHsv(),
       oldHue: 0,
-      rgb: {},
-      source: undefined,
+      rgb: tinycolor(auto.light).toRgb(),
+      source: "hex",
     });
     setSelectDark({
       hex: auto.dark,
-      hsl: {},
-      hsv: {},
+      hsl: tinycolor(auto.dark).toHsl(),
+      hsv: tinycolor(auto.dark).toHsv(),
       oldHue: 0,
-      rgb: {},
-      source: undefined,
+      rgb: tinycolor(auto.dark).toRgb(),
+      source: "hex",
     });
   };
+
+  console.log(color);
 
   const showPrimary = selectPrimary.hex;
   const showSecondary = selectSecondary.hex;
@@ -353,15 +196,29 @@ const Generate = () => {
   const showLight = selectLight.hex;
   const showDark = selectDark.hex;
 
-  console.log({ showPrimary, showSecondary, showAccent, showLight, showDark });
+  // console.log({ showPrimary, showSecondary, showAccent, showLight, showDark });
+  // console.log({
+  //   selectPrimary,
+  //   selectSecondary,
+  //   selectAccent,
+  //   selectLight,
+  //   selectDark,
+  // });
+
+  // hex: "#37d67a"
+  // hsl : {h: 145.28301886792454, s: 0.6597510373443984, l: 0.5274509803921569, a: 1}
+  // hsv : {h: 145.28301886792454, s: 0.7429906542056075, v: 0.8392156862745098, a: 1}
+  // oldHue : 250
+  // rgb :  {r: 55, g: 214, b: 122, a: 1}
+  // source: "hex"
 
   return (
     <section className="container mx-auto w-11/12 my-12">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-20">
         <div>
           <HuePicker
-            onChange={(e: any) => handleHue(e)}
-            color={hue.rgb}
+            onChange={(e: any) => handleColor(e)}
+            color={color.rgb}
             // onChangeComplete={(color) => setHue(color)}
           />
         </div>
@@ -375,15 +232,15 @@ const Generate = () => {
         </div>
         <div>
           <ChromePicker
-            onChange={(e: any) => handleChrome(e)}
-            color={chrome.rgb}
+            onChange={(e: any) => handleColor(e)}
+            color={color.rgb}
             // onChangeComplete={(color) => setChrome(color)}
           />
         </div>
         <div>
           <BlockPicker
-            onChange={(e: any) => handleBlock(e)}
-            color={block.rgb}
+            onChange={(e: any) => handleColor(e)}
+            color={color.rgb}
             // onChangeComplete={(color) => setBlock(color)}
           />
         </div>
@@ -474,40 +331,186 @@ const Generate = () => {
             </div>
           </div>
         </div>
-        <div>6</div>
+        <div className="">
+          <small className="text-xs font-bold border-b-2 ">
+            Selected colors
+          </small>
+          <div className="mt-5 space-y-5 h-[50vh] overflow-scroll">
+            {selectPrimary.hex ? (
+              <div>
+                <h2 className="text-sm font-thin tracking-widest flex gap-2 items-center">
+                  Primary Code: <IoCopyOutline className="cursor-pointer" />
+                </h2>
+                <p className="text-[10px]">
+                  <b>hex:</b> {selectPrimary.hex}
+                </p>
+                <p className="text-[10px]">
+                  <b>hsl:</b> {selectPrimary.hsl.h} {selectPrimary.hsl.s}{" "}
+                  {selectPrimary.hsl.l} {selectPrimary.hsv.a}
+                </p>
+                <p className="text-[10px]">
+                  <b>hsv:</b> {selectPrimary.hsv.h} {selectPrimary.hsv.s}{" "}
+                  {selectPrimary.hsv.v} {selectPrimary.hsv.a}
+                </p>
+                <p className="text-[10px]">
+                  <b>oldHue:</b> {selectPrimary.oldHue}
+                </p>
+                <p className="text-[10px]">
+                  <b>source:</b> {selectPrimary.source}
+                </p>
+              </div>
+            ) : (
+              <small className="text-sm font-thin tracking-widest block">
+                Please Select Primary Color
+              </small>
+            )}
+            {selectSecondary.hex ? (
+              <div>
+                <h2 className="text-sm font-thin tracking-widest flex gap-2 items-center">
+                  Secondary Code: <IoCopyOutline className="cursor-pointer" />
+                </h2>
+                <p className="text-[10px]">
+                  <b>hex:</b> {selectSecondary.hex}
+                </p>
+                <p className="text-[10px]">
+                  <b>hsl:</b> {selectSecondary.hsl.h} {selectSecondary.hsl.s}{" "}
+                  {selectSecondary.hsl.l} {selectSecondary.hsv.a}
+                </p>
+                <p className="text-[10px]">
+                  <b>hsv:</b> {selectSecondary.hsv.h} {selectSecondary.hsv.s}{" "}
+                  {selectSecondary.hsv.v} {selectSecondary.hsv.a}
+                </p>
+                <p className="text-[10px]">
+                  <b>oldHue:</b> {selectSecondary.oldHue}
+                </p>
+                <p className="text-[10px]">
+                  <b>source:</b> {selectSecondary.source}
+                </p>
+              </div>
+            ) : (
+              <small className="text-sm font-thin tracking-widest block">
+                Please Select Secondary Color
+              </small>
+            )}
+            {selectAccent.hex ? (
+              <div>
+                <h2 className="text-sm font-thin tracking-widest flex gap-2 items-center">
+                  Accent Code: <IoCopyOutline className="cursor-pointer" />
+                </h2>
+                <p className="text-[10px]">
+                  <b>hex:</b> {selectAccent.hex}
+                </p>
+                <p className="text-[10px]">
+                  <b>hsl:</b> {selectAccent.hsl.h} {selectAccent.hsl.s}{" "}
+                  {selectAccent.hsl.l} {selectAccent.hsv.a}
+                </p>
+                <p className="text-[10px]">
+                  <b>hsv:</b> {selectAccent.hsv.h} {selectAccent.hsv.s}{" "}
+                  {selectAccent.hsv.v} {selectAccent.hsv.a}
+                </p>
+                <p className="text-[10px]">
+                  <b>oldHue:</b> {selectAccent.oldHue}
+                </p>
+                <p className="text-[10px]">
+                  <b>source:</b> {selectAccent.source}
+                </p>
+              </div>
+            ) : (
+              <small className="text-sm font-thin tracking-widest block">
+                Please Select Accent Color
+              </small>
+            )}
+            {selectLight.hex ? (
+              <div>
+                <h2 className="text-sm font-thin tracking-widest flex gap-2 items-center">
+                  Light Code: <IoCopyOutline className="cursor-pointer" />
+                </h2>
+                <p className="text-[10px]">
+                  <b>hex:</b> {selectLight.hex}
+                </p>
+                <p className="text-[10px]">
+                  <b>hsl:</b> {selectLight.hsl.h} {selectLight.hsl.s}{" "}
+                  {selectLight.hsl.l} {selectLight.hsv.a}
+                </p>
+                <p className="text-[10px]">
+                  <b>hsv:</b> {selectLight.hsv.h} {selectLight.hsv.s}{" "}
+                  {selectLight.hsv.v} {selectLight.hsv.a}
+                </p>
+                <p className="text-[10px]">
+                  <b>oldHue:</b> {selectLight.oldHue}
+                </p>
+                <p className="text-[10px]">
+                  <b>source:</b> {selectLight.source}
+                </p>
+              </div>
+            ) : (
+              <small className="text-sm font-thin tracking-widest block">
+                Please Select Light Color
+              </small>
+            )}
+            {selectDark.hex ? (
+              <div>
+                <h2 className="text-sm font-thin tracking-widest flex gap-2 items-center">
+                  Dark Code: <IoCopyOutline className="cursor-pointer" />
+                </h2>
+                <p className="text-[10px]">
+                  <b>hex:</b> {selectDark.hex}
+                </p>
+                <p className="text-[10px]">
+                  <b>hsl:</b> {selectDark.hsl.h} {selectDark.hsl.s}{" "}
+                  {selectDark.hsl.l} {selectDark.hsv.a}
+                </p>
+                <p className="text-[10px]">
+                  <b>hsv:</b> {selectDark.hsv.h} {selectDark.hsv.s}{" "}
+                  {selectDark.hsv.v} {selectDark.hsv.a}
+                </p>
+                <p className="text-[10px]">
+                  <b>oldHue:</b> {selectDark.oldHue}
+                </p>
+                <p className="text-[10px]">
+                  <b>source:</b> {selectDark.source}
+                </p>
+              </div>
+            ) : (
+              <small className="text-sm font-thin tracking-widest block">
+                Please Select Dark Color
+              </small>
+            )}
+          </div>
+        </div>
         <div>
           <CirclePicker
-            onChange={(e: any) => handleCircle(e)}
-            color={circle.rgb}
+            onChange={(e: any) => handleColor(e)}
+            color={color.rgb}
             // onChangeComplete={(color) => setCircle(color)}
           />
         </div>
         <div>8</div>
         <div>
           <CompactPicker
-            onChange={(e: any) => handleCompact(e)}
-            color={compact.rgb}
+            onChange={(e: any) => handleColor(e)}
+            color={color.rgb}
             // onChangeComplete={(color) => setCompact(color)}
           />
         </div>
         <div>
           <TwitterPicker
-            onChange={(e: any) => handleTwitter(e)}
-            color={twitter.rgb}
+            onChange={(e: any) => handleColor(e)}
+            color={color.rgb}
             // onChangeComplete={(color) => setTwitter(color)}
           />
         </div>
         <div>
           <SketchPicker
-            onChange={(e: any) => handleSketch(e)}
-            color={sketch.rgb}
+            onChange={(e: any) => handleColor(e)}
+            color={color.rgb}
             // onChangeComplete={(color) => setSketch(color)}
           />
         </div>
         <div>
           <SwatchesPicker
-            onChange={(e: any) => handleSwathes(e)}
-            color={swatches.rgb}
+            onChange={(e: any) => handleColor(e)}
+            color={color.rgb}
             // onChangeComplete={(color) => setSwatches(color)}
           />
         </div>

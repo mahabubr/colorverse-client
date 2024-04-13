@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { RouterProvider } from "react-router-dom";
 import router from "./Routes/Routes";
-import { Slide, ToastContainer } from "react-toastify";
+import { Slide, ToastContainer, toast } from "react-toastify";
 import { useCallback, useEffect } from "react";
 import { useRefreshUserMutation } from "./Redux/Features/Auth/AuthApi";
 import Cookies from "js-cookie";
@@ -16,6 +16,7 @@ const App = () => {
     createRefreshToken({ payload }).then((res: any) => {
       const token = res?.data?.data;
       Cookies.set("token", token, { expires: 30, secure: true });
+      toast.info("Refresh token activated");
     });
   }, [createRefreshToken]);
 
