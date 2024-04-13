@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
+import { TiTick } from "react-icons/ti";
 
 const SelectColor = ({
   selectPrimary,
@@ -8,6 +10,22 @@ const SelectColor = ({
   selectLight,
   selectDark,
 }: any) => {
+  const [primaryCopied, setPrimaryCopied] = useState(false);
+  const [secondaryCopied, setSecondaryCopied] = useState(false);
+  const [accentCopied, setAccentCopied] = useState(false);
+  const [lightCopied, setLightCopied] = useState(false);
+  const [darkCopied, setDarkCopied] = useState(false);
+
+  const copyClipboard = (color: any, setCopied: any) => {
+    navigator.clipboard.writeText(color);
+
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
+
   return (
     <div>
       <small className="text-xs font-bold border-b-2 ">Selected colors</small>
@@ -15,7 +33,17 @@ const SelectColor = ({
         {selectPrimary.hex ? (
           <div>
             <h2 className="text-sm font-thin tracking-widest flex gap-2 items-center">
-              Primary Code: <IoCopyOutline className="cursor-pointer" />
+              Primary Code:{" "}
+              {primaryCopied ? (
+                <TiTick />
+              ) : (
+                <IoCopyOutline
+                  className="cursor-pointer"
+                  onClick={() =>
+                    copyClipboard(selectPrimary.hex, setPrimaryCopied)
+                  }
+                />
+              )}
             </h2>
             <p className="text-[10px]">
               <b>hex:</b> {selectPrimary.hex}
@@ -43,7 +71,17 @@ const SelectColor = ({
         {selectSecondary.hex ? (
           <div>
             <h2 className="text-sm font-thin tracking-widest flex gap-2 items-center">
-              Secondary Code: <IoCopyOutline className="cursor-pointer" />
+              Secondary Code:
+              {secondaryCopied ? (
+                <TiTick />
+              ) : (
+                <IoCopyOutline
+                  className="cursor-pointer"
+                  onClick={() =>
+                    copyClipboard(selectSecondary.hex, setSecondaryCopied)
+                  }
+                />
+              )}
             </h2>
             <p className="text-[10px]">
               <b>hex:</b> {selectSecondary.hex}
@@ -71,7 +109,17 @@ const SelectColor = ({
         {selectAccent.hex ? (
           <div>
             <h2 className="text-sm font-thin tracking-widest flex gap-2 items-center">
-              Accent Code: <IoCopyOutline className="cursor-pointer" />
+              Accent Code:{" "}
+              {accentCopied ? (
+                <TiTick />
+              ) : (
+                <IoCopyOutline
+                  className="cursor-pointer"
+                  onClick={() =>
+                    copyClipboard(selectAccent.hex, setAccentCopied)
+                  }
+                />
+              )}
             </h2>
             <p className="text-[10px]">
               <b>hex:</b> {selectAccent.hex}
@@ -99,7 +147,15 @@ const SelectColor = ({
         {selectLight.hex ? (
           <div>
             <h2 className="text-sm font-thin tracking-widest flex gap-2 items-center">
-              Light Code: <IoCopyOutline className="cursor-pointer" />
+              Light Code:{" "}
+              {lightCopied ? (
+                <TiTick />
+              ) : (
+                <IoCopyOutline
+                  className="cursor-pointer"
+                  onClick={() => copyClipboard(selectLight.hex, setLightCopied)}
+                />
+              )}
             </h2>
             <p className="text-[10px]">
               <b>hex:</b> {selectLight.hex}
@@ -127,7 +183,15 @@ const SelectColor = ({
         {selectDark.hex ? (
           <div>
             <h2 className="text-sm font-thin tracking-widest flex gap-2 items-center">
-              Dark Code: <IoCopyOutline className="cursor-pointer" />
+              Dark Code:{" "}
+              {darkCopied ? (
+                <TiTick />
+              ) : (
+                <IoCopyOutline
+                  className="cursor-pointer"
+                  onClick={() => copyClipboard(selectDark.hex, setDarkCopied)}
+                />
+              )}
             </h2>
             <p className="text-[10px]">
               <b>hex:</b> {selectDark.hex}
