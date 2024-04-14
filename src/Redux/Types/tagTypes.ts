@@ -3,6 +3,7 @@ export enum tagTypes {
   auth = "auth",
   pallet = "pallet",
   palletFilter = "palletFilter",
+  collection = "collection",
 }
 
 export const tagTypesList = [
@@ -10,4 +11,5 @@ export const tagTypesList = [
   tagTypes.auth,
   tagTypes.pallet,
   tagTypes.palletFilter,
+  tagTypes.collection,
 ];

@@ -10,10 +10,15 @@ import { GrPrevious } from "react-icons/gr";
 import moment from "moment";
 import { FaEye, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useMeQuery } from "../../../Redux/Features/Auth/AuthApi";
+import { useCreateCollectionMutation } from "../../../Redux/Features/Collection/collectionApi";
+import { toast as toasifyToast } from "react-toastify";
 
 const Content = ({ filterInfo }: { filterInfo: string }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 9;
+
+  const { data: userData } = useMeQuery({});
 
   const { data, isLoading } = useGetPalletQuery({
     page: currentPage + 1,
@@ -21,12 +26,29 @@ const Content = ({ filterInfo }: { filterInfo: string }) => {
     search: filterInfo,
   });
 
+  const [createCollection] = useCreateCollectionMutation();
+
   const copyClipboard = (color: any) => {
     navigator.clipboard.writeText(color);
     toast.success(`Copied Done ${color}`);
   };
 
   const palletData = data?.data;
+
+  const handleCreateCollection = (id: string) => {
+    const payload = {
+      palletId: id,
+      userId: userData?.data?.id,
+    };
+
+    createCollection({ payload }).then((res: any) => {
+      if (res?.data?.status === 500) {
+        toasifyToast.error(res?.data?.data);
+      } else {
+        toasifyToast.success(res?.data?.message);
+      }
+    });
+  };
 
   return (
     <div>
@@ -91,7 +113,10 @@ const Content = ({ filterInfo }: { filterInfo: string }) => {
               </div>
               <div className="md:flex justify-between items-center mt-2 gap-2">
                 <div className="flex justify-between items-center gap-2">
-                  <p className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md ">
+                  <p
+                    onClick={() => handleCreateCollection(pallet.id)}
+                    className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md "
+                  >
                     <FaHeart className="text-red-200" /> Collect
                   </p>
                   <Link

@@ -1,22 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Skeleton from "react-loading-skeleton";
 import { useGetPalletFilterOptionsQuery } from "../../../Redux/Features/PalletFilter/palletFilterApi";
+import { Link } from "react-router-dom";
 
 const FilterSide = ({ setFilterInfo }: any) => {
   const { data, isLoading } = useGetPalletFilterOptionsQuery({});
 
   return (
     <div>
-      <div className="space-y-4">
-        <h2
-          onClick={() => setFilterInfo("")}
-          className="text-sm tracking-widest border px-4 py-2 rounded-md shadow-inner cursor-pointer custom-shadow"
-        >
-          New
-        </h2>
-        <h2 className="text-sm tracking-widest border px-4 py-2 rounded-md shadow-inner cursor-pointer custom-shadow">
-          Collection
-        </h2>
+      <div className="">
+        <Link to="/">
+          <h2
+            onClick={() => setFilterInfo("")}
+            className="text-sm tracking-widest border px-4 py-2 rounded-md shadow-inner cursor-pointer custom-shadow"
+          >
+            New
+          </h2>
+        </Link>
+        <Link to="/collection">
+          <h2 className="text-sm tracking-widest border px-4 py-2 rounded-md shadow-inner cursor-pointer custom-shadow mt-2">
+            Collection
+          </h2>
+        </Link>
       </div>
 
       <div className="mt-5">

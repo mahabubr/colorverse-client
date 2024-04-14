@@ -5,6 +5,7 @@ import SignUp from "../Pages/Regester/SignUp/SignUp";
 import Login from "../Pages/Regester/Login/Login";
 import Generate from "../Pages/Generate/Generate";
 import SinglePallet from "../Pages/SinglePallet/SinglePallet";
+import Collection from "../Pages/Collection/Collection";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/pallet/:id",
         element: <SinglePallet />,
+      },
+      {
+        path: "/collection",
+        element: <Collection />,
       },
     ],
   },
