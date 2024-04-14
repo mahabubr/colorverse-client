@@ -12,7 +12,15 @@ const userApi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
+    getSingleUser: builder.query({
+      query: ({ id }) => ({
+        url: `/users/${id}`,
+        method: "GET",
+        params: {},
+      }),
+      providesTags: [tagTypes.user],
+    }),
   }),
 });
 
-export const { useCreateUserMutation } = userApi;
+export const { useCreateUserMutation, useGetSingleUserQuery } = userApi;

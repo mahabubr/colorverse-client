@@ -7,6 +7,7 @@ import Generate from "../Pages/Generate/Generate";
 import SinglePallet from "../Pages/SinglePallet/SinglePallet";
 import Collection from "../Pages/Collection/Collection";
 import Profile from "../Pages/Profile/Profile";
+import UserProfile from "../Pages/UserProfile/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/profile/:id",
         element: <Profile />,
+      },
+      {
+        path: "/user/profile/:id",
+        element: <UserProfile />,
       },
     ],
   },
