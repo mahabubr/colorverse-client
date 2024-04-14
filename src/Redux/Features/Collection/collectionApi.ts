@@ -13,15 +13,26 @@ const collectionApi = api.injectEndpoints({
       invalidatesTags: [tagTypes.collection],
     }),
     getCollection: builder.query({
-      query: ({id}) => ({
+      query: ({ id }) => ({
         url: `/collection/${id}`,
         method: "GET",
         params: {},
       }),
       providesTags: [tagTypes.collection],
     }),
+    deleteCollection: builder.mutation({
+      query: ({ id }) => ({
+        url: `/collection/${id}`,
+        method: "DELETE",
+        params: {},
+      }),
+      invalidatesTags: [tagTypes.collection],
+    }),
   }),
 });
 
-export const { useCreateCollectionMutation, useGetCollectionQuery } =
-  collectionApi;
+export const {
+  useCreateCollectionMutation,
+  useGetCollectionQuery,
+  useDeleteCollectionMutation,
+} = collectionApi;

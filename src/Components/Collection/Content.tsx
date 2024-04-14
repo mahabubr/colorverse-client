@@ -1,24 +1,39 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IoCopyOutline } from "react-icons/io5";
 import { useMeQuery } from "../../Redux/Features/Auth/AuthApi";
-import { useGetCollectionQuery } from "../../Redux/Features/Collection/collectionApi";
+import {
+  useDeleteCollectionMutation,
+  useGetCollectionQuery,
+} from "../../Redux/Features/Collection/collectionApi";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Skeleton from "../Shared/Skeleton/Skeleton";
 import toast from "react-hot-toast";
 import { IoMdTrash } from "react-icons/io";
+import { toast as toasifyToast } from "react-toastify";
 
 const Content = () => {
   const { data: userData } = useMeQuery({});
 
   const { data, isLoading } = useGetCollectionQuery({ id: userData?.data?.id });
+  const [deleteCollection] = useDeleteCollectionMutation();
 
   const collectionData = data?.data;
 
   const copyClipboard = (color: any) => {
     navigator.clipboard.writeText(color);
     toast.success(`Copied Done ${color}`);
+  };
+
+  const handleDelete = (id: string) => {
+    deleteCollection({ id }).then((res: any) => {
+      if (res.data.status === 200) {
+        toasifyToast.success(res.data.message);
+      } else {
+        toasifyToast.success(res.data.data);
+      }
+    });
   };
 
   return (
@@ -84,7 +99,10 @@ const Content = () => {
               </div>
               <div className="md:flex justify-between items-center mt-2 gap-2">
                 <div className="flex justify-between items-center gap-2">
-                  <p className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-2 px-2 rounded-md ">
+                  <p
+                    onClick={() => handleDelete(pallet?.id)}
+                    className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-2 px-2 rounded-md "
+                  >
                     <IoMdTrash className="text-red-200" />
                   </p>
                   <Link
