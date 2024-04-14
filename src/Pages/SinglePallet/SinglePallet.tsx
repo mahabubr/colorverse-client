@@ -4,6 +4,7 @@ import { useGetSinglePalletQuery } from "../../Redux/Features/Pallet/palletApi";
 import ColorPallet from "../../Components/SinglePallet/ColorPallet";
 import ColorCode from "../../Components/SinglePallet/ColorCode";
 import ColorTags from "../../Components/SinglePallet/ColorTags";
+import ContributeProfile from "../../Components/SinglePallet/ContributeProfile";
 
 const SinglePallet = () => {
   const { id } = useParams();
@@ -20,6 +21,9 @@ const SinglePallet = () => {
       </div>
       <div className="mt-10">
         <ColorTags data={data} />
+      </div>
+      <div className="mt-10">
+        <ContributeProfile data={data} />
       </div>
     </div>
   );

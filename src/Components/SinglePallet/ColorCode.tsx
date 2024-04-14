@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 const ColorCode = ({ data }: any) => {
   const pallet = data?.data;
+
 
   return (
     <div className="lg:w-7/12 mx-auto space-y-4 text-center">

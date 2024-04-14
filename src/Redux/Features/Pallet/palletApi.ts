@@ -13,10 +13,10 @@ const palletApi = api.injectEndpoints({
       invalidatesTags: [tagTypes.pallet],
     }),
     getPallet: builder.query({
-      query: ({ page, limit }) => ({
+      query: ({ page, limit, search }) => ({
         url: "/pallet",
         method: "GET",
-        params: { page, limit },
+        params: { page, limit, search },
       }),
       providesTags: [tagTypes.pallet],
     }),

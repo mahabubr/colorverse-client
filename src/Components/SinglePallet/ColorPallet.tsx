@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import moment from "moment";
 import toast from "react-hot-toast";
@@ -6,8 +7,13 @@ import { IoCopyOutline } from "react-icons/io5";
 import Skeleton from "react-loading-skeleton";
 import { HiDownload } from "react-icons/hi";
 
+// @ts-ignore
+import { useToImage } from "@hcorta/react-to-image";
+
 const ColorPallet = ({ data, isLoading }: any) => {
   const pallet = data?.data;
+
+  const { ref, isLoading: imageLoading, getPng } = useToImage();
 
   const copyClipboard = (color: any) => {
     navigator.clipboard.writeText(color);
@@ -17,7 +23,10 @@ const ColorPallet = ({ data, isLoading }: any) => {
   return (
     <div>
       {data && data.data && !isLoading ? (
-        <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <section
+          ref={ref}
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+        >
           <div
             className="h-40 md:h-60 lg:h-96 text-sm flex justify-center items-center shadow-inner"
             style={{ backgroundColor: pallet.primary.hex }}
@@ -84,17 +93,35 @@ const ColorPallet = ({ data, isLoading }: any) => {
       <div className="md:flex justify-between items-center mt-4 gap-2">
         <div className="flex justify-between items-center gap-2">
           <p className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md">
-            <FaHeart className="text-red-500" /> 00
+            <FaHeart className="text-red-200" /> Collect
           </p>
-          <p className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md">
-            <HiDownload /> Image
-          </p>
-          <p className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md">
+          {imageLoading ? (
+            <p
+              onClick={getPng}
+              className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md"
+            >
+              ...
+            </p>
+          ) : (
+            <p
+              onClick={getPng}
+              className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md"
+            >
+              <HiDownload /> Image
+            </p>
+          )}
+          <p
+            onClick={() => {
+              navigator.clipboard.writeText(location.href);
+              toast.success("Linked Copied");
+            }}
+            className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md"
+          >
             <FaLink /> Link
           </p>
         </div>
         <p className="text-xs font-light">
-          {moment(pallet?.createdAt).startOf("hours").fromNow()}
+          {moment(pallet?.createdAt).startOf("minutes").fromNow()}
         </p>
       </div>
     </div>

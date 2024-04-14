@@ -11,13 +11,14 @@ import moment from "moment";
 import { FaEye, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const Content = () => {
+const Content = ({ filterInfo }: { filterInfo: string }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 9;
 
   const { data, isLoading } = useGetPalletQuery({
     page: currentPage + 1,
     limit: perPage,
+    search: filterInfo,
   });
 
   const copyClipboard = (color: any) => {
@@ -90,8 +91,8 @@ const Content = () => {
               </div>
               <div className="md:flex justify-between items-center mt-2 gap-2">
                 <div className="flex justify-between items-center gap-2">
-                  <p className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md">
-                    <FaHeart className="text-red-500" /> 00
+                  <p className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md ">
+                    <FaHeart className="text-red-200" /> Collect
                   </p>
                   <Link
                     to={`/pallet/${pallet.id}`}
@@ -101,7 +102,7 @@ const Content = () => {
                   </Link>
                 </div>
                 <p className="text-xs font-light">
-                  {moment(pallet.createdAt).startOf("hours").fromNow()}
+                  {moment(pallet.createdAt).startOf("minutes").fromNow()}
                 </p>
               </div>
             </div>
