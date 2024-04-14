@@ -9,9 +9,18 @@ const PalletFilterApi = api.injectEndpoints({
         method: "GET",
         params: {},
       }),
-      providesTags: [tagTypes.palletFilter],
+      providesTags: [tagTypes.pallet],
+    }),
+    getUserPallet: builder.query({
+      query: ({ id }) => ({
+        url: `/pallet-filter/user/${id}`,
+        method: "GET",
+        params: {},
+      }),
+      providesTags: [tagTypes.pallet],
     }),
   }),
 });
 
-export const { useGetPalletFilterOptionsQuery } = PalletFilterApi;
+export const { useGetPalletFilterOptionsQuery, useGetUserPalletQuery } =
+  PalletFilterApi;

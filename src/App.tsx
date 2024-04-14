@@ -33,7 +33,7 @@ const App = () => {
   }, [refreshToken]);
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <RouterProvider router={router} />
       <ToastContainer
         position="bottom-center"

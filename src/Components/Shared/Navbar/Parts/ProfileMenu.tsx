@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 
 import Cookies from "js-cookie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface IUser {
   id: string;
@@ -22,8 +22,11 @@ interface IUser {
 }
 
 const ProfileMenu = ({ userData }: { userData: { data: IUser } }) => {
+  const navigate = useNavigate();
+
   const signOut = () => {
     Cookies.remove("token");
+    navigate("/login");
     window.location.reload();
   };
 
@@ -55,7 +58,7 @@ const ProfileMenu = ({ userData }: { userData: { data: IUser } }) => {
         onPointerEnterCapture={undefined}
         onPointerLeaveCapture={undefined}
       >
-        <Link to={`/user/profile/${userData?.data?.id}`}>
+        <Link to={`/profile/${userData?.data?.id}`}>
           <MenuItem
             className="flex items-center gap-2"
             placeholder={undefined}
