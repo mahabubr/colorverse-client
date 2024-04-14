@@ -6,58 +6,42 @@ import ProfileMenu from "./Parts/ProfileMenu";
 import { Link } from "react-router-dom";
 import { useMeQuery } from "../../../Redux/Features/Auth/AuthApi";
 import { PiMagicWand } from "react-icons/pi";
-
-const items = [
-  {
-    id: 0,
-    name: "Cobol",
-  },
-  {
-    id: 1,
-    name: "JavaScript",
-  },
-  {
-    id: 2,
-    name: "Basic",
-  },
-  {
-    id: 3,
-    name: "PHP",
-  },
-  {
-    id: 4,
-    name: "Java",
-  },
-];
+import { useGetPalletFilterOptionsQuery } from "../../../Redux/Features/PalletFilter/palletFilterApi";
+import { useDispatch } from "react-redux";
+import {
+  removeSearch,
+  setSearch,
+} from "../../../Redux/Slice/Search/searchSlice";
 
 const Navbar = () => {
   const { data: userData, isSuccess } = useMeQuery({});
 
-  const handleOnSearch = (string: any, results: any) => {
-    console.log(string, results);
-  };
+  const { data: searchData } = useGetPalletFilterOptionsQuery({});
+  const dispatch = useDispatch();
 
-  const handleOnHover = (result: any) => {
-    console.log(result);
-  };
+  const items = searchData?.data?.map((sc: string, i: number) => ({
+    id: i,
+    name: sc,
+  }));
+
+  const handleOnSearch = () => {};
+
+  const handleOnHover = () => {};
 
   const handleOnSelect = (item: any) => {
-    console.log(item);
+    dispatch(setSearch(item));
   };
 
-  const handleOnFocus = () => {
-    console.log("Focused");
+  const handleOnFocus = () => {};
+
+  const handleOnClear = () => {
+    dispatch(removeSearch());
   };
 
   const formatResult = (item: any) => {
     return (
       <>
-        <span style={{ display: "block", textAlign: "left" }}>
-          id: {item.id}
-        </span>
-        <span style={{ display: "block", textAlign: "left" }}>
-          name: {item.name}
-        </span>
+        <p className="text-xs font-extralight tracking-widest">{item.name}</p>
       </>
     );
   };
@@ -80,6 +64,9 @@ const Navbar = () => {
             autoFocus
             formatResult={formatResult}
             styling={{ height: "30px" }}
+            className="text-xs "
+            onClear={handleOnClear}
+            placeholder="Search"
           />
         </div>
         <div className="col-span-1 flex gap-3 justify-center">
