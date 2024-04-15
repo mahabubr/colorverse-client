@@ -17,7 +17,7 @@ const ProfileDetails = ({ isLoading, user }: any) => {
             <div
               className="absolute top-0 w-full h-full bg-center bg-cover"
               style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80')`,
+                backgroundImage: `url('https://images.unsplash.com/photo-1558470598-a5dda9640f68?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
               }}
             >
               <span

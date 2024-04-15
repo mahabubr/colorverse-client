@@ -126,16 +126,7 @@ const ProfilePallet = ({ isLoading, user, render }: any) => {
               </div>
             ))
           ) : (
-            <div className="grid grid-cols-2">
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-            </div>
+            <div className="text-xs font-bold"></div>
           )}
         </div>
       )}

@@ -3,7 +3,6 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
-  Avatar,
   Typography,
 } from "@material-tailwind/react";
 
@@ -36,17 +35,10 @@ const ProfileMenu = ({ userData }: { userData: { data: IUser } }) => {
   return (
     <Menu>
       <MenuHandler>
-        {!cutOutName ? (
-          <Avatar
-            variant="circular"
-            alt="tania andrew"
-            className="cursor-pointer"
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-            size="sm"
-          />
+        {cutOutName.includes("undefined") ? (
+          <div className="rounded-full bg-gradient-to-r font-bold from-gray-700 to-gray-600 p-1 h-8 w-8 text-center cursor-pointer flex justify-center items-center">
+            <p className="text-white text-xs flex">C</p>
+          </div>
         ) : (
           <div className="rounded-full bg-gradient-to-r font-bold from-gray-700 to-gray-600 p-1 h-8 w-8 text-center cursor-pointer flex justify-center items-center">
             <p className="text-white text-xs flex">{cutOutName}</p>
