@@ -8,13 +8,15 @@ function ProfilePage() {
 
   const user = data?.data;
 
+  const render = true;
+
   return (
     <main className="">
       <div>
         <ProfileDetails user={user} isLoading={isLoading} />
       </div>
       <div className="container mx-auto w-11/12">
-        <ProfilePallet user={user} isLoading={isLoading} />
+        <ProfilePallet user={user} isLoading={isLoading} render={render} />
       </div>
     </main>
   );

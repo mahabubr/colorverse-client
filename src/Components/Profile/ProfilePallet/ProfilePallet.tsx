@@ -5,18 +5,33 @@ import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import moment from "moment";
 import toast from "react-hot-toast";
+import { toast as toasifyToast } from "react-toastify";
+import { IoMdTrash } from "react-icons/io";
+import { useDeletePalletMutation } from "../../../Redux/Features/Pallet/palletApi";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const ProfilePallet = ({ isLoading, user }: any) => {
+const ProfilePallet = ({ isLoading, user, render }: any) => {
   const { data, isLoading: palletLoading } = useGetUserPalletQuery({
     id: user?.id,
   });
 
   const userPallet = data?.data;
 
+  const [deletePallet] = useDeletePalletMutation();
+
   const copyClipboard = (color: any) => {
     navigator.clipboard.writeText(color);
     toast.success(`Copied Done ${color}`);
+  };
+
+  const handleDelete = (id: string) => {
+    deletePallet({ id }).then((res: any) => {
+      if (res.data.status === 200) {
+        toasifyToast.success(res.data.message);
+      } else {
+        toasifyToast.success(res.data.data);
+      }
+    });
   };
 
   return (
@@ -89,6 +104,14 @@ const ProfilePallet = ({ isLoading, user }: any) => {
                 </div>
                 <div className="flex justify-between items-center mt-2 gap-2">
                   <div className="flex justify-between items-center gap-2">
+                    {render && (
+                      <p
+                        onClick={() => handleDelete(pallet?.id)}
+                        className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-2 px-2 rounded-md "
+                      >
+                        <IoMdTrash className="text-red-200" />
+                      </p>
+                    )}
                     <Link
                       to={`/pallet/${pallet?.id}`}
                       className="duration-500 px-2 py-2 rounded-md cursor-pointer border"

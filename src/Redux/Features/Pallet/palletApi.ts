@@ -28,6 +28,15 @@ const palletApi = api.injectEndpoints({
       }),
       providesTags: [tagTypes.pallet],
     }),
+
+    deletePallet: builder.mutation({
+      query: ({ id }) => ({
+        url: `/pallet/${id}`,
+        method: "DELETE",
+        params: {},
+      }),
+      invalidatesTags: [tagTypes.pallet],
+    }),
   }),
 });
 
@@ -35,4 +44,5 @@ export const {
   useCreatePalletMutation,
   useGetPalletQuery,
   useGetSinglePalletQuery,
+  useDeletePalletMutation,
 } = palletApi;
