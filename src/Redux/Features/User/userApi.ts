@@ -28,6 +28,14 @@ const userApi = api.injectEndpoints({
       }),
       providesTags: [tagTypes.user, tagTypes.pallet],
     }),
+    getRecentUsers: builder.query({
+      query: () => ({
+        url: "/users/recent-users",
+        method: "GET",
+        params: {},
+      }),
+      providesTags: [tagTypes.user, tagTypes.pallet],
+    }),
   }),
 });
 
@@ -35,4 +43,5 @@ export const {
   useCreateUserMutation,
   useGetSingleUserQuery,
   useGetTopContributorQuery,
+  useGetRecentUsersQuery
 } = userApi;

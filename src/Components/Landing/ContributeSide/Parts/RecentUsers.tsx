@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Skeleton from "react-loading-skeleton";
-import { useGetTopContributorQuery } from "../../../../Redux/Features/User/userApi";
+import { useGetRecentUsersQuery } from "../../../../Redux/Features/User/userApi";
 import { Link } from "react-router-dom";
 import { MdSubdirectoryArrowLeft } from "react-icons/md";
 
-const TopContributor = () => {
-  const { data, isLoading } = useGetTopContributorQuery({});
+const RecentUsers = () => {
+  const { data, isLoading } = useGetRecentUsersQuery({});
 
   return (
     <div>
-      <h2 className="text-xs text-start font-bold border-b">Top Contributor</h2>
+      <h2 className="text-xs text-start font-bold border-b">Recent Users</h2>
       <div className="overflow-scroll h-60 p-2 space-y-3 mt-3">
         {isLoading ? (
           <>
@@ -50,4 +50,4 @@ const TopContributor = () => {
   );
 };
 
-export default TopContributor;
+export default RecentUsers;

@@ -1,9 +1,15 @@
+import RecentUsers from "./Parts/RecentUsers";
 import TopContributor from "./Parts/TopContributor";
 
 const ContributeSide = () => {
   return (
-    <div>
-      <TopContributor />
+    <div className="space-y-5">
+      <div>
+        <TopContributor />
+      </div>
+      <div>
+        <RecentUsers />
+      </div>
     </div>
   );
 };
