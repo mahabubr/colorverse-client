@@ -1,5 +1,11 @@
+import TopContributor from "./Parts/TopContributor";
+
 const ContributeSide = () => {
-  return <div>ContributeSide</div>;
+  return (
+    <div>
+      <TopContributor />
+    </div>
+  );
 };
 
 export default ContributeSide;

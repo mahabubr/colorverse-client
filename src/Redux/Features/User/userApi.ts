@@ -20,7 +20,19 @@ const userApi = api.injectEndpoints({
       }),
       providesTags: [tagTypes.user],
     }),
+    getTopContributor: builder.query({
+      query: () => ({
+        url: "/users/top-contributor",
+        method: "GET",
+        params: {},
+      }),
+      providesTags: [tagTypes.user, tagTypes.pallet],
+    }),
   }),
 });
 
-export const { useCreateUserMutation, useGetSingleUserQuery } = userApi;
+export const {
+  useCreateUserMutation,
+  useGetSingleUserQuery,
+  useGetTopContributorQuery,
+} = userApi;
