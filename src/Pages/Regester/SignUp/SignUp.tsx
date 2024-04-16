@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa";
 import image from "../../../assets/regester/signup.svg";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
@@ -74,32 +73,15 @@ const SignUp = () => {
               Create your free account
             </p>
             <p className="mt-6 text-center  md:text-left text-sm">
-              Already using color verse?
+              Already using color verse?{" "}
               <Link
                 to="/Login"
                 className="whitespace-nowrap font-semibold text-orange-700"
               >
-                {" "}
                 Login here
               </Link>
             </p>
 
-            <Button
-              variant="outlined"
-              className="flex items-center gap-3 mt-8 justify-center"
-              size="sm"
-              placeholder={undefined}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-              onClick={() =>
-                toast.success(
-                  "O auth not available. please enjoy custom authentication"
-                )
-              }
-            >
-              Get started with Google
-              <FaGoogle />
-            </Button>
             <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
               <div className="absolute left-1/2 h-6 -translate-x-1/2 bg-white px-4 text-center text-sm text-gray-500">
                 Or use email instead

@@ -8,10 +8,18 @@ import { useFormik } from "formik";
 import loginValidationSchema from "../../../Validations/Regester/LoginSchema";
 import { useLoginUserMutation } from "../../../Redux/Features/Auth/AuthApi";
 import Cookies from "js-cookie";
+import { useState } from "react";
 
 const Login = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const navigate = useNavigate();
+
+  const [loginInfo, setLoginInfo] = useState<{
+    email: string;
+    password: string;
+  }>({ email: "", password: "" });
+
+  console.log(loginInfo);
 
   const formik = useFormik({
     initialValues: {
@@ -80,12 +88,10 @@ const Login = () => {
               onPointerEnterCapture={undefined}
               onPointerLeaveCapture={undefined}
               onClick={() =>
-                toast.success(
-                  "O auth not available. please enjoy custom authentication"
-                )
+                setLoginInfo({ email: "mr@creator.com", password: "12345678" })
               }
             >
-              Get started with Google
+              Login as a Mr Creator
               <FaGoogle />
             </Button>
             <div className="relative mt-8 flex h-px place-items-center bg-gray-200">

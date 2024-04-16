@@ -1,8 +1,6 @@
 const PrivacyPolicy = () => {
   return (
     <div className="container mx-auto w-11/12 py-8 text-left">
-      {" "}
-      {/* Align text to left */}
       <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
       <p className="mb-4 border-b">Last updated: February 31, 2024</p>
       <section className="mb-8">
@@ -10,9 +8,8 @@ const PrivacyPolicy = () => {
         <p className="mb-4">
           This Privacy Policy outlines our practices regarding the collection,
           use, and sharing of personal information through our digital products
-          and services, including Preline (preline.co). By using our services,
-          provided by Preline Labs Ltd, you agree to the collection and use of
-          information as described in this policy.
+          and services, including. By using our services, provided by you agree
+          to the collection and use of information as described in this policy.
         </p>
       </section>
       <section className="mb-8">
