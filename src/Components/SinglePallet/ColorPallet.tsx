@@ -28,57 +28,42 @@ const ColorPallet = ({ data, isLoading }: any) => {
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
         >
           <div
-            className="h-40 md:h-60 lg:h-96 text-sm flex justify-center items-center shadow-inner"
+            className="h-40 md:h-60 lg:h-96 text-sm flex justify-center items-center pen-clip"
             style={{ backgroundColor: pallet.primary.hex }}
           >
-            <p
-              className="flex justify-center items-center gap-2 cursor-pointer"
-              onClick={() => copyClipboard(pallet.primary.hex)}
-            >
+            <p className="flex justify-center items-center gap-2 cursor-pointer" onClick={() => copyClipboard(pallet.primary.hex)}>
               {pallet.primary.hex} <IoCopyOutline />
             </p>
           </div>
           <div
-            className="h-40 md:h-60 lg:h-96 text-sm flex justify-center items-center shadow-inner"
+            className="h-40 md:h-60 lg:h-96 text-sm flex justify-center items-center pen-clip"
             style={{ backgroundColor: pallet.secondary.hex }}
           >
-            <p
-              className="flex justify-center items-center gap-2 cursor-pointer"
-              onClick={() => copyClipboard(pallet.secondary.hex)}
-            >
+            <p className="flex justify-center items-center gap-2 cursor-pointer" onClick={() => copyClipboard(pallet.secondary.hex)}>
               {pallet.secondary.hex} <IoCopyOutline />
             </p>
           </div>
           <div
-            className="h-40 md:h-60 lg:h-96 text-sm flex justify-center items-center shadow-inner"
+            className="h-40 md:h-60 lg:h-96 text-sm flex justify-center items-center pen-clip"
             style={{ backgroundColor: pallet.accent.hex }}
           >
-            <p
-              className="flex justify-center items-center gap-2 cursor-pointer"
-              onClick={() => copyClipboard(pallet.accent.hex)}
-            >
+            <p className="flex justify-center items-center gap-2 cursor-pointer" onClick={() => copyClipboard(pallet.accent.hex)}>
               {pallet.accent.hex} <IoCopyOutline />
             </p>
           </div>
           <div
-            className="h-40 md:h-60 lg:h-96 text-sm flex justify-center items-center shadow-inner"
+            className="h-40 md:h-60 lg:h-96 text-sm flex justify-center items-center pen-clip"
             style={{ backgroundColor: pallet.light.hex }}
           >
-            <p
-              className="flex justify-center items-center gap-2 cursor-pointer"
-              onClick={() => copyClipboard(pallet.light.hex)}
-            >
+            <p className="flex justify-center items-center gap-2 cursor-pointer" onClick={() => copyClipboard(pallet.light.hex)}>
               {pallet.light.hex} <IoCopyOutline />
             </p>
           </div>
           <div
-            className="h-40 md:h-60 lg:h-96 text-sm flex justify-center items-center shadow-inner"
+            className="h-40 md:h-60 lg:h-96 text-sm flex justify-center items-center pen-clip"
             style={{ backgroundColor: pallet.dark.hex }}
           >
-            <p
-              className="flex justify-center items-center gap-2 cursor-pointer"
-              onClick={() => copyClipboard(pallet.dark.hex)}
-            >
+            <p className="flex justify-center items-center gap-2 cursor-pointer" onClick={() => copyClipboard(pallet.dark.hex)}>
               {pallet.dark.hex} <IoCopyOutline />
             </p>
           </div>
