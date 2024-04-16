@@ -11,6 +11,7 @@ import UserProfile from "../Pages/UserProfile/UserProfile";
 import Profiles from "../Pages/Profiles/Profiles";
 import EditProfile from "../Pages/Profile/EditProfile/EditProfile";
 import ProtectedRoute from "./Protected/ProtectedRoute";
+import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 
 const router = createBrowserRouter([
   {
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
             <EditProfile />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
       },
     ],
   },

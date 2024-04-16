@@ -142,7 +142,7 @@ const Login = () => {
                 />
                 <label className="inline-block text-sm" htmlFor="remember-me">
                   I agree to the{" "}
-                  <Link className="underline text-sm" to="/terms">
+                  <Link className="underline text-sm" to="/privacy-policy">
                     Terms and Conditions
                   </Link>
                 </label>
