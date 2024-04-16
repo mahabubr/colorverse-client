@@ -10,6 +10,7 @@ import Profile from "../Pages/Profile/Profile";
 import UserProfile from "../Pages/UserProfile/UserProfile";
 import Profiles from "../Pages/Profiles/Profiles";
 import EditProfile from "../Pages/Profile/EditProfile/EditProfile";
+import ProtectedRoute from "./Protected/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Landing />,
+        element: (
+          <ProtectedRoute>
+            <Landing />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/login",
@@ -30,31 +35,59 @@ const router = createBrowserRouter([
       },
       {
         path: "/generate",
-        element: <Generate />,
+        element: (
+          <ProtectedRoute>
+            <Generate />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/pallet/:id",
-        element: <SinglePallet />,
+        element: (
+          <ProtectedRoute>
+            <SinglePallet />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/collection",
-        element: <Collection />,
+        element: (
+          <ProtectedRoute>
+            <Collection />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/profile/:id",
-        element: <Profile />,
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/user/profile/:id",
-        element: <UserProfile />,
+        element: (
+          <ProtectedRoute>
+            <UserProfile />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/profiles",
-        element: <Profiles />,
+        element: (
+          <ProtectedRoute>
+            <Profiles />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/profile/edit",
-        element: <EditProfile />,
+        element: (
+          <ProtectedRoute>
+            <EditProfile />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
