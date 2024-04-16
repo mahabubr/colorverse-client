@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function ProfileCard({ user }: any) {
   return (
     <div>
-      <div className="relative flex flex-col items-center rounded-md p-4 border shadow-inner">
+      <div className="relative flex flex-col items-center rounded-md p-4 border shadow-inner overflow-hidden">
         <div className="relative flex h-32 w-full justify-center rounded-md bg-cover">
           <img
             src="https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/media/banner.ef572d78f29b0fee0a09.png"

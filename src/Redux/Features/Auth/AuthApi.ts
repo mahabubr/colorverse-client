@@ -28,7 +28,7 @@ const authApi = api.injectEndpoints({
         params: {},
         body: {},
       }),
-      providesTags: [tagTypes.auth],
+      providesTags: [tagTypes.auth, tagTypes.user],
     }),
   }),
 });

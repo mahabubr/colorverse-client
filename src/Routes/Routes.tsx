@@ -9,6 +9,7 @@ import Collection from "../Pages/Collection/Collection";
 import Profile from "../Pages/Profile/Profile";
 import UserProfile from "../Pages/UserProfile/UserProfile";
 import Profiles from "../Pages/Profiles/Profiles";
+import EditProfile from "../Pages/Profile/EditProfile/EditProfile";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/profiles",
         element: <Profiles />,
+      },
+      {
+        path: "/profile/edit",
+        element: <EditProfile />,
       },
     ],
   },

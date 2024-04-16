@@ -44,6 +44,15 @@ const userApi = api.injectEndpoints({
       }),
       providesTags: [tagTypes.user, tagTypes.pallet],
     }),
+    updateUser: builder.mutation({
+      query: ({ id, payload }) => ({
+        url: `/users/${id}`,
+        method: "PATCH",
+        params: {},
+        body: payload,
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
   }),
 });
 
@@ -53,4 +62,5 @@ export const {
   useGetTopContributorQuery,
   useGetRecentUsersQuery,
   useGetUsersQuery,
+  useUpdateUserMutation
 } = userApi;
