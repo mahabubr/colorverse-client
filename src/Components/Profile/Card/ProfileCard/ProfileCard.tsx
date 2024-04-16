@@ -28,6 +28,7 @@ function ProfileCard({ user }: any) {
           <p className="text-xs font-light text-orange-700 uppercase tracking-wider mt-4">
             {user?.role}
           </p>
+          <p className="text-xs text-gray-600 tracking-wider">{user?.bio}</p>
         </div>
         <div className="mt-6 mb-3 flex gap-14 md:gap-14">
           <Link to={`/user/profile/${user?.id}`}>

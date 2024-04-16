@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GrSettingsOption } from "react-icons/gr";
+import { TbDetails } from "react-icons/tb";
 import Skeleton from "react-loading-skeleton";
 
 const ProfileDetails = ({ isLoading, user }: any) => {
@@ -68,10 +69,16 @@ const ProfileDetails = ({ isLoading, user }: any) => {
                     <div className="text-sm leading-normal mt-0 mb-2 text-gray-400  uppercase">
                       {user?.email}
                     </div>
-                    <div className="mb-2 text-gray-600 mt-10">
+                    <div className="mb-2 text-orange-700 mt-10">
                       <p className="flex justify-center items-center gap-1">
                         <GrSettingsOption />
                         {user?.role}
+                      </p>
+                    </div>
+                    <div className="mb-2 text-gray-600 mt-2 text-sm">
+                      <p className="flex justify-center items-center gap-1">
+                        <TbDetails />
+                        {user?.bio}
                       </p>
                     </div>
                   </div>
