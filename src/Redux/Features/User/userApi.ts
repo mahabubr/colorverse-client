@@ -12,6 +12,14 @@ const userApi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
+    getUsers: builder.query({
+      query: ({ page, limit, search }) => ({
+        url: "/users",
+        method: "GET",
+        params: { page, limit, search },
+      }),
+      providesTags: [tagTypes.pallet],
+    }),
     getSingleUser: builder.query({
       query: ({ id }) => ({
         url: `/users/${id}`,
@@ -43,5 +51,6 @@ export const {
   useCreateUserMutation,
   useGetSingleUserQuery,
   useGetTopContributorQuery,
-  useGetRecentUsersQuery
+  useGetRecentUsersQuery,
+  useGetUsersQuery,
 } = userApi;
