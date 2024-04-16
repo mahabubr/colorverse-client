@@ -52,96 +52,99 @@ const Content = ({ filterInfo }: { filterInfo: string }) => {
 
   return (
     <div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 place-items-center gap-4 md:gap-10">
-        {palletData && palletData.length && !isLoading ? (
-          palletData.map((pallet: any) => (
-            <div key={pallet.id} className="w-full">
-              <div
-                className="h-12 flex justify-center items-center cursor-pointer text-[10px] shadow-inner rounded-t-md"
-                style={{ backgroundColor: pallet.primary.hex }}
-              >
-                <p
-                  className="flex justify-center items-center gap-2"
-                  onClick={() => copyClipboard(pallet.primary.hex)}
+      <div>
+        {isLoading ? (
+          <div className="grid grid-cols-2 lg:grid-cols-5">
+            {Array.from({ length: 20 }).map((_: any, i: number) => (
+              <Skeleton key={i} />
+            ))}
+          </div>
+        ) : palletData && palletData?.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 place-items-center gap-4 md:gap-10">
+            {palletData.map((pallet: any) => (
+              <div key={pallet.id} className="w-full">
+                <div
+                  className="h-12 flex justify-center items-center cursor-pointer text-[10px] shadow-inner rounded-t-md"
+                  style={{ backgroundColor: pallet.primary.hex }}
                 >
-                  {pallet.primary.hex} <IoCopyOutline />
-                </p>
-              </div>
-              <div
-                className="h-12 flex justify-center items-center cursor-pointer text-[10px] shadow-inner"
-                style={{ backgroundColor: pallet.secondary.hex }}
-              >
-                <p
-                  className="flex justify-center items-center gap-2"
-                  onClick={() => copyClipboard(pallet.secondary.hex)}
-                >
-                  {pallet.secondary.hex} <IoCopyOutline />
-                </p>
-              </div>
-              <div
-                className="h-12 flex justify-center items-center cursor-pointer text-[10px] shadow-inner"
-                style={{ backgroundColor: pallet.accent.hex }}
-              >
-                <p
-                  className="flex justify-center items-center gap-2"
-                  onClick={() => copyClipboard(pallet.accent.hex)}
-                >
-                  {pallet.accent.hex} <IoCopyOutline />
-                </p>
-              </div>
-              <div
-                className="h-12 flex justify-center items-center cursor-pointer text-[10px] shadow-inner"
-                style={{ backgroundColor: pallet.light.hex }}
-              >
-                <p
-                  className="flex justify-center items-center gap-2"
-                  onClick={() => copyClipboard(pallet.light.hex)}
-                >
-                  {pallet.light.hex} <IoCopyOutline />
-                </p>
-              </div>
-              <div
-                className="h-12 flex justify-center items-center cursor-pointer text-[10px] shadow-inner rounded-b-md"
-                style={{ backgroundColor: pallet.dark.hex }}
-              >
-                <p
-                  className="flex justify-center items-center gap-2"
-                  onClick={() => copyClipboard(pallet.dark.hex)}
-                >
-                  {pallet.dark.hex} <IoCopyOutline />
-                </p>
-              </div>
-              <div className="md:flex justify-between items-center mt-2 gap-2">
-                <div className="flex justify-between items-center gap-2">
                   <p
-                    onClick={() => handleCreateCollection(pallet.id)}
-                    className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md "
+                    className="flex justify-center items-center gap-2"
+                    onClick={() => copyClipboard(pallet.primary.hex)}
                   >
-                    <FaHeart className="text-red-200" /> Collect
+                    {pallet.primary.hex} <IoCopyOutline />
                   </p>
-                  <Link
-                    to={`/pallet/${pallet.id}`}
-                    className="duration-500 px-2 py-2 rounded-md cursor-pointer border"
-                  >
-                    <FaEye />
-                  </Link>
                 </div>
-                <p className="text-xs font-light">
-                  {moment(pallet.createdAt).startOf("minutes").fromNow()}
-                </p>
+                <div
+                  className="h-12 flex justify-center items-center cursor-pointer text-[10px] shadow-inner"
+                  style={{ backgroundColor: pallet.secondary.hex }}
+                >
+                  <p
+                    className="flex justify-center items-center gap-2"
+                    onClick={() => copyClipboard(pallet.secondary.hex)}
+                  >
+                    {pallet.secondary.hex} <IoCopyOutline />
+                  </p>
+                </div>
+                <div
+                  className="h-12 flex justify-center items-center cursor-pointer text-[10px] shadow-inner"
+                  style={{ backgroundColor: pallet.accent.hex }}
+                >
+                  <p
+                    className="flex justify-center items-center gap-2"
+                    onClick={() => copyClipboard(pallet.accent.hex)}
+                  >
+                    {pallet.accent.hex} <IoCopyOutline />
+                  </p>
+                </div>
+                <div
+                  className="h-12 flex justify-center items-center cursor-pointer text-[10px] shadow-inner"
+                  style={{ backgroundColor: pallet.light.hex }}
+                >
+                  <p
+                    className="flex justify-center items-center gap-2"
+                    onClick={() => copyClipboard(pallet.light.hex)}
+                  >
+                    {pallet.light.hex} <IoCopyOutline />
+                  </p>
+                </div>
+                <div
+                  className="h-12 flex justify-center items-center cursor-pointer text-[10px] shadow-inner rounded-b-md"
+                  style={{ backgroundColor: pallet.dark.hex }}
+                >
+                  <p
+                    className="flex justify-center items-center gap-2"
+                    onClick={() => copyClipboard(pallet.dark.hex)}
+                  >
+                    {pallet.dark.hex} <IoCopyOutline />
+                  </p>
+                </div>
+                <div className="md:flex justify-between items-center mt-2 gap-2">
+                  <div className="flex justify-between items-center gap-2">
+                    <p
+                      onClick={() => handleCreateCollection(pallet.id)}
+                      className="flex justify-between items-center gap-1 text-sm border cursor-pointer duration-500 py-1 px-2 rounded-md "
+                    >
+                      <FaHeart className="text-red-200" /> Collect
+                    </p>
+                    <Link
+                      to={`/pallet/${pallet.id}`}
+                      className="duration-500 px-2 py-2 rounded-md cursor-pointer border"
+                    >
+                      <FaEye />
+                    </Link>
+                  </div>
+                  <p className="text-xs font-light">
+                    {moment(pallet.createdAt).startOf("minutes").fromNow()}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         ) : (
-          <div className="grid grid-cols-2">
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
+          <div className="flex justify-center items-center">
+            <small className="text-xs text-center ">
+              Collection not found. please collect it.
+            </small>
           </div>
         )}
       </div>
