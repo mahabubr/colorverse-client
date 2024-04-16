@@ -30,7 +30,6 @@ const Navbar = () => {
 
   const handleOnSelect = (item: any) => {
     dispatch(setSearch(item));
-    console.log(item);
   };
 
   const handleOnFocus = () => {};

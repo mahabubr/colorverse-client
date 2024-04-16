@@ -42,10 +42,10 @@ const Content = ({ filterInfo }: { filterInfo: string }) => {
     };
 
     createCollection({ payload }).then((res: any) => {
-      if (res?.data?.status === 500) {
-        toasifyToast.error(res?.data?.data);
-      } else {
+      if (res?.data?.status === 200) {
         toasifyToast.success(res?.data?.message);
+      } else {
+        toasifyToast.error(res?.data?.data);
       }
     });
   };
