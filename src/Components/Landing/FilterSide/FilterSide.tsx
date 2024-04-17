@@ -14,7 +14,7 @@ const FilterSide = ({ setFilterInfo }: any) => {
             onClick={() => setFilterInfo("")}
             className="text-sm tracking-widest border px-4 py-2 rounded-md shadow-inner cursor-pointer custom-shadow"
           >
-            New
+            Pallets
           </h2>
         </Link>
         <Link to="/collection">
