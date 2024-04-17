@@ -37,11 +37,6 @@ const RecentComments = () => {
           ))
         )}
       </div>
-      <div className="text-end font-medium tracking-widest underline cursor-pointer">
-        <Link to="/profiles">
-          <small>View All</small>
-        </Link>
-      </div>
     </div>
   );
 };
