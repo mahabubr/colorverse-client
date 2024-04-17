@@ -5,6 +5,8 @@ import ColorPallet from "../../Components/SinglePallet/ColorPallet";
 import ColorCode from "../../Components/SinglePallet/ColorCode";
 import ColorTags from "../../Components/SinglePallet/ColorTags";
 import ContributeProfile from "../../Components/SinglePallet/ContributeProfile";
+import Comments from "../../Components/SinglePallet/Comments";
+import ShowComments from "../../Components/SinglePallet/ShowComments";
 
 const SinglePallet = () => {
   const { id } = useParams();
@@ -24,6 +26,12 @@ const SinglePallet = () => {
       </div>
       <div className="mt-10">
         <ContributeProfile data={data} />
+      </div>
+      <div className="mt-10 border-b pb-8">
+        <Comments id={id as string} />
+      </div>
+      <div className="mt-20">
+        <ShowComments id={id as string} />
       </div>
     </div>
   );

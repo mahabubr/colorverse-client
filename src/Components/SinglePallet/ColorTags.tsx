@@ -11,7 +11,7 @@ const ColorTags = ({ data }: any) => {
       <div className="flex flex-wrap gap-2 p-2 justify-center">
         {pallet?.tags &&
           pallet?.tags.length > 0 &&
-          pallet?.tags?.map((tag: string, i:number) => (
+          pallet?.tags?.map((tag: string, i: number) => (
             <p
               key={i}
               className="text-xs inline-flex items-center font-bold leading-sm uppercase px-2 py-1 bg-orange-200 text-orange-700 rounded-full"
