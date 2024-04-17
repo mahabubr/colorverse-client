@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const ProfileEdit = () => {
   const { data: userData } = useMeQuery({});
-  const [updateUser] = useUpdateUserMutation();
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -151,7 +151,7 @@ const ProfileEdit = () => {
                     color="deep-orange"
                     className="flex justify-center w-full lg:w-auto "
                     variant="gradient"
-                    // loading={isLoading}
+                    loading={isLoading}
                   >
                     Update Information
                   </Button>

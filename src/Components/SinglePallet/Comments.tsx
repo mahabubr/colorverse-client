@@ -9,7 +9,7 @@ const Comments = ({ id }: { id: string }) => {
 
   const { data: userData } = useMeQuery({});
 
-  const [postComments] = useCreateCommentsMutation();
+  const [postComments, {isLoading}] = useCreateCommentsMutation();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -56,6 +56,7 @@ const Comments = ({ id }: { id: string }) => {
               onPointerEnterCapture={undefined}
               onPointerLeaveCapture={undefined}
               className="w-full lg:w-auto"
+              loading={isLoading}
             >
               Post Comment
             </Button>

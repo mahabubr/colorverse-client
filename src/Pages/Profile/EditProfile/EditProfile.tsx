@@ -6,7 +6,7 @@ const EditProfile = () => {
     <div className="container mx-auto w-11/12 my-12">
       <div className="grid  lg:grid-cols-5 gap-10">
         <div className="lg:col-span-4">
-          <ProfileEdit />ro
+          <ProfileEdit />
         </div>
         <div className="lg:col-span-1 hidden lg:block">
           <ContributeSide />
