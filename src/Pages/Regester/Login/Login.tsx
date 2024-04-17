@@ -1,25 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa";
 import image from "../../../assets/regester/login.svg";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import loginValidationSchema from "../../../Validations/Regester/LoginSchema";
 import { useLoginUserMutation } from "../../../Redux/Features/Auth/AuthApi";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { IoGlassesOutline } from "react-icons/io5";
 
 const Login = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const navigate = useNavigate();
-
-  const [loginInfo, setLoginInfo] = useState<{
-    email: string;
-    password: string;
-  }>({ email: "", password: "" });
-
-  console.log(loginInfo);
 
   const formik = useFormik({
     initialValues: {
@@ -88,11 +80,14 @@ const Login = () => {
               onPointerEnterCapture={undefined}
               onPointerLeaveCapture={undefined}
               onClick={() =>
-                setLoginInfo({ email: "mr@creator.com", password: "12345678" })
+                formik.setValues({
+                  email: "mr@creator.com",
+                  password: "12345678",
+                })
               }
             >
+              <IoGlassesOutline />
               Login as a Mr Creator
-              <FaGoogle />
             </Button>
             <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
               <div className="absolute left-1/2 h-6 -translate-x-1/2 bg-white px-4 text-center text-sm text-gray-500">
