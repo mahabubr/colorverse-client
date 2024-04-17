@@ -1,3 +1,4 @@
+import RecentComments from "./Parts/RecentComments";
 import RecentUsers from "./Parts/RecentUsers";
 import TopContributor from "./Parts/TopContributor";
 
@@ -9,6 +10,9 @@ const ContributeSide = () => {
       </div>
       <div>
         <RecentUsers />
+      </div>
+      <div>
+        <RecentComments />
       </div>
     </div>
   );
