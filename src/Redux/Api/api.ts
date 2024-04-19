@@ -16,8 +16,7 @@ const api = createApi({
       }
     },
   }),
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
   tagTypes: tagTypesList,
 });
 
