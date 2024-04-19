@@ -4,7 +4,7 @@ import { useGetPalletQuery } from "../../../Redux/Features/Pallet/palletApi";
 import Skeleton from "../../Shared/Skeleton/Skeleton";
 import { IoCopyOutline } from "react-icons/io5";
 import ReactPaginate from "react-paginate";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
 import { GrPrevious } from "react-icons/gr";
 import moment from "moment";
@@ -27,6 +27,12 @@ const Content = ({ filterInfo }: { filterInfo: string }) => {
   });
 
   const [createCollection] = useCreateCollectionMutation();
+
+  useEffect(() => {
+    if (filterInfo) {
+      setCurrentPage(0);
+    }
+  }, [filterInfo]);
 
   const copyClipboard = (color: any) => {
     navigator.clipboard.writeText(color);

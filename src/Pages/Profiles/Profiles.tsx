@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileCard from "../../Components/Profile/Card/ProfileCard/ProfileCard";
 import { useGetUsersQuery } from "../../Redux/Features/User/userApi";
 import ReactPaginate from "react-paginate";
@@ -12,7 +12,7 @@ import ContributeSide from "../../Components/Landing/ContributeSide/ContributeSi
 
 const Profiles = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const perPage = 8;
+  const perPage = 7;
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -23,6 +23,12 @@ const Profiles = () => {
     limit: perPage,
     search: searchTerm,
   });
+
+  useEffect(() => {
+    if (searchTerm) {
+      setCurrentPage(0);
+    }
+  }, [searchTerm]);
 
   const userFilterData = data?.data?.filter(
     (user: any) => user?.id !== userData?.data?.id
