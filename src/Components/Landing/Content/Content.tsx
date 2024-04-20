@@ -14,7 +14,13 @@ import { useMeQuery } from "../../../Redux/Features/Auth/AuthApi";
 import { useCreateCollectionMutation } from "../../../Redux/Features/Collection/collectionApi";
 import { toast as toasifyToast } from "react-toastify";
 
-const Content = ({ filterInfo }: { filterInfo: string }) => {
+const Content = ({
+  filterInfo,
+  setInfoLoading,
+}: {
+  filterInfo: string;
+  setInfoLoading: any;
+}) => {
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 9;
 
@@ -33,6 +39,10 @@ const Content = ({ filterInfo }: { filterInfo: string }) => {
       setCurrentPage(0);
     }
   }, [filterInfo]);
+
+  useEffect(() => {
+    setInfoLoading(isLoading);
+  }, [isLoading, setInfoLoading]);
 
   const copyClipboard = (color: any) => {
     navigator.clipboard.writeText(color);

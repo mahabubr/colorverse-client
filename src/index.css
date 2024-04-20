@@ -76,3 +76,21 @@
   clip-path: polygon(100% 0, 100% 50%, 70% 100%, 30% 100%, 0 50%, 0 0);
 }
 
+.sliding-text-container {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sliding-text {
+  display: block;
+  animation: slide-text 40s linear infinite;
+}
+
+@keyframes slide-text {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

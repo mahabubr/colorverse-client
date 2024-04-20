@@ -8,10 +8,13 @@ import { useMeQuery } from "../../Redux/Features/Auth/AuthApi";
 import { IoIosLock } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
+import ServerInfo from "../../Components/Landing/ServerInfo/ServerInfo";
 
 const Landing = () => {
   const [filterInfo, setFilterInfo] = useState("");
   const [showModal, setShowModal] = useState(false);
+
+  const [infoLoading, setInfoLoading] = useState<any>(false);
 
   const { data: userData, isLoading } = useMeQuery({});
 
@@ -29,40 +32,47 @@ const Landing = () => {
   }, [search, isLoading, user]);
 
   return (
-    <section className="container mx-auto w-11/12 my-12">
-      <div className="grid  lg:grid-cols-5 gap-10">
-        <div className="lg:col-span-1 hidden lg:block">
-          <FilterSide setFilterInfo={setFilterInfo} />
-        </div>
-        <div className="lg:col-span-3">
-          <Content filterInfo={filterInfo} />
-        </div>
-        <div className="lg:col-span-1 hidden lg:block">
-          <ContributeSide />
-        </div>
-      </div>
-
-      {showModal && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-60 flex justify-center items-center">
-          <div className="backdrop-blur-md bg-white/50 p-8 rounded-md text-center flex justify-center items-center flex-col">
-            <IoIosLock className="text-9xl " />
-            <p className="font-bold">Please log in to continue.</p>
-            <Link to="/login">
-              <Button
-                color="deep-orange"
-                size="sm"
-                variant="gradient"
-                placeholder={undefined}
-                onPointerEnterCapture={undefined}
-                onPointerLeaveCapture={undefined}
-                className="mt-2"
-              >
-                Login
-              </Button>
-            </Link>
-          </div>
+    <section className="w-full">
+      {infoLoading && (
+        <div className="w-full bg-red-400 p-1 text-white font-light tracking-widest text-xs">
+          <ServerInfo />
         </div>
       )}
+      <section className="container mx-auto w-11/12 mb-12 mt-4">
+        <div className="grid  lg:grid-cols-5 gap-10">
+          <div className="lg:col-span-1 hidden lg:block">
+            <FilterSide setFilterInfo={setFilterInfo} />
+          </div>
+          <div className="lg:col-span-3">
+            <Content setInfoLoading={setInfoLoading} filterInfo={filterInfo} />
+          </div>
+          <div className="lg:col-span-1 hidden lg:block">
+            <ContributeSide />
+          </div>
+        </div>
+
+        {showModal && (
+          <div className="fixed inset-0 bg-gray-900 bg-opacity-60 flex justify-center items-center">
+            <div className="backdrop-blur-md bg-white/50 p-8 rounded-md text-center flex justify-center items-center flex-col">
+              <IoIosLock className="text-9xl " />
+              <p className="font-bold">Please log in to continue.</p>
+              <Link to="/login">
+                <Button
+                  color="deep-orange"
+                  size="sm"
+                  variant="gradient"
+                  placeholder={undefined}
+                  onPointerEnterCapture={undefined}
+                  onPointerLeaveCapture={undefined}
+                  className="mt-2"
+                >
+                  Login
+                </Button>
+              </Link>
+            </div>
+          </div>
+        )}
+      </section>
     </section>
   );
 };
