@@ -69,7 +69,7 @@ const Content = ({
   return (
     <div>
       <div>
-        {!isLoading ? (
+        {isLoading ? (
           <div className="grid grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 20 }).map((_: any, i: number) => (
               <Skeleton key={i} />
